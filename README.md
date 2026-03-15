@@ -1,11 +1,11 @@
-# 🦇 Project Vengeance: Systems Curriculum Mesh
-> **DETECCIÓN DE AVANCE // CIUDAD GÓTICA - DEPARTAMENTO DE SISTEMAS**
+# 🦇 Malla Curricular -- Universidad Mayor de San Simón
+> **//DETECCIÓN DE AVANCE//**
 
-[![Version](https://img.shields.io/badge/Version-1.0.0-red.svg?style=for-the-badge&logo=batman)](https://github.com/Dist13AndrCh/Malla-Ingenieria-en-Sistemas-UMSS-main)
+[![Version](https://img.shields.io/badge/Version-1.0.0-red.svg?style=for-the-badge&logo=batman)](https://github.com/Bass-avg/Malla-Ingenieria-en-Sistemas-UMSS)
 [![Tech](https://img.shields.io/badge/Built%20With-Vanilla%20JS%20%7C%20CSS%20Grid-8b0000?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![UMSS](https://img.shields.io/badge/UMSS-Sistemas-black?style=for-the-badge&logo=google-scholar)](https://www.umss.edu.bo/)
 
-Una herramienta táctica diseñada para el seguimiento del progreso académico de la carrera de **Ingeniería de Sistemas (UMSS)**. Con una interfaz inspirada en la estética tecnológica de Batman, este panel permite visualizar el avance semestral y la dependencia entre materias.
+Una herramienta diseñada para el seguimiento del progreso académico de la carrera de **Ingeniería de Sistemas (UMSS)**. Con una interfaz inspirada en la estética tecnológica de Batman, este panel permite visualizar el avance semestral y la dependencia entre materias.
 
 ---
 
@@ -27,7 +27,7 @@ Una herramienta táctica diseñada para el seguimiento del progreso académico d
 │   ├── style.css       # Sistema de diseño y estilos visuales
 │   ├── script.js       # Motor de lógica y datos de materias
 │   └── icons/          # Favicons y manifiesto de aplicación
-└── README.md           # Documentación táctica
+└── README.md           # Documentación 
 ```
 
 ---
@@ -36,7 +36,7 @@ Una herramienta táctica diseñada para el seguimiento del progreso académico d
 
 1.  Clona este repositorio:
     ```bash
-    git clone https://github.com/Dist13AndrCh/Malla-Ingenieria-en-Sistemas-UMSS-main.git
+    git clone https://github.com/Bass-avg/Malla-Ingenieria-en-Sistemas-UMSS.git
     ```
 2.  Abre `index.html` en cualquier navegador moderno.
 3.  Haz clic en las materias completadas para desbloquear tu camino hacia la graduación.
@@ -54,3 +54,6 @@ Una herramienta táctica diseñada para el seguimiento del progreso académico d
 ---
 
 > *"No es quién eres en el fondo, sino lo que haces lo que te define."* 🦇
+<div style="text-align: center;">
+  <p> **Sr.Bass** </p>
+</div>

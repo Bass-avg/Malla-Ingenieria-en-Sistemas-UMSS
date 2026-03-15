@@ -53,6 +53,5 @@ Una herramienta diseñada para el seguimiento del progreso académico de la carr
 
 ---
 
-> *"No es quién eres en el fondo, sino lo que haces lo que te define."* 🦇
->
+> *"Cada paso, por pequeño que sea, te acerca a tu meta."* 🦇
 > **Sr.Bass**

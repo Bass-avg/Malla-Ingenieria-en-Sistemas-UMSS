@@ -54,6 +54,4 @@ Una herramienta diseñada para el seguimiento del progreso académico de la carr
 ---
 
 > *"No es quién eres en el fondo, sino lo que haces lo que te define."* 🦇
-<div style="text-align: center;">
-  <p> **Sr.Bass** </p>
-</div>
+                                                      **Sr.Bass**

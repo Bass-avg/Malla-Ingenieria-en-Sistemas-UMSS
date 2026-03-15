@@ -54,4 +54,5 @@ Una herramienta diseñada para el seguimiento del progreso académico de la carr
 ---
 
 > *"Cada paso, por pequeño que sea, te acerca a tu meta."* 🦇
+> 
 > **Sr.Bass**

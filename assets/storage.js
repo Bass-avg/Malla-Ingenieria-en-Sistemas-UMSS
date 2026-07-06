@@ -11,6 +11,8 @@ const Storage = (() => {
         PROGRESS:    'vengeance_progress',
         INTENSIVO:   'vengeance_intensivo',
         HABILITADAS: 'vengeance_habilitadas',
+        CURSANDO:    'vengeance_cursando',
+        INTENTOS:    'vengeance_intentos',
         THEME:       'vengeance_theme',
     };
 
@@ -50,11 +52,23 @@ const Storage = (() => {
         saveHabilitadas(arr) { return trySet(KEYS.HABILITADAS, arr); },
         clearHabilitadas()   { return trySet(KEYS.HABILITADAS, []); },
 
-        /* Limpia TODO el avance (progreso normal + intensivo + habilitadas) */
+        /* Materias Cursando */
+        loadCursando()    { return tryGet(KEYS.CURSANDO, []); },
+        saveCursando(arr) { return trySet(KEYS.CURSANDO, arr); },
+        clearCursando()   { return trySet(KEYS.CURSANDO, []); },
+
+        /* Intentos (Reprobaciones) */
+        loadIntentos()    { return tryGet(KEYS.INTENTOS, {}); },
+        saveIntentos(obj) { return trySet(KEYS.INTENTOS, obj); },
+        clearIntentos()   { return trySet(KEYS.INTENTOS, {}); },
+
+        /* Limpia TODO el avance */
         clearAll() {
             trySet(KEYS.PROGRESS, []);
             trySet(KEYS.INTENSIVO, []);
             trySet(KEYS.HABILITADAS, []);
+            trySet(KEYS.CURSANDO, []);
+            trySet(KEYS.INTENTOS, {});
         },
 
         /* Tema visual */
@@ -64,12 +78,14 @@ const Storage = (() => {
         /* Backup: descarga JSON con el progreso actual */
         exportBackup() {
             const payload = {
-                version:      '2.2',
+                version:      '2.3',
                 app:          'Malla-UMSS',
                 timestamp:    new Date().toISOString(),
                 approved:     tryGet(KEYS.PROGRESS, []),
                 intensivo:    tryGet(KEYS.INTENSIVO, []),
                 habilitadas:  tryGet(KEYS.HABILITADAS, []),
+                cursando:     tryGet(KEYS.CURSANDO, []),
+                intentos:     tryGet(KEYS.INTENTOS, {}),
             };
             const blob = new Blob(
                 [JSON.stringify(payload, null, 2)],
@@ -104,6 +120,10 @@ const Storage = (() => {
                         }
                         if (data.version && data.version >= '2.2') {
                             trySet(KEYS.HABILITADAS, data.habilitadas || []);
+                        }
+                        if (data.version && data.version >= '2.3') {
+                            trySet(KEYS.CURSANDO, data.cursando || []);
+                            trySet(KEYS.INTENTOS, data.intentos || {});
                         }
                         
                         resolve(approved);

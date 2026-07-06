@@ -11,6 +11,8 @@
 let approvedCourses  = Storage.loadProgress();
 let intensivoCourses = Storage.loadIntensivo();
 let habilitadas      = Storage.loadHabilitadas();
+let cursandoCourses  = Storage.loadCursando();
+let intentos         = Storage.loadIntentos();
 let currentTheme     = Storage.loadTheme();
 let modoIntensivo    = false;          // se resetea al recargar
 let modoHabilitacion = false;          // se resetea al recargar
@@ -72,6 +74,7 @@ async function toggleCourse(id) {
     const isIntensivo  = intensivoCourses.includes(id);
     const isApproved   = approvedCourses.includes(id);
     const isHabilitada = habilitadas.includes(id);
+    const isCursando   = cursandoCourses.includes(id);
     const effective    = _getEffectiveApproved();
 
     if (isIntensivo || isApproved) {
@@ -92,6 +95,34 @@ async function toggleCourse(id) {
         }
         _applyFullCascade();
 
+    } else if (isCursando) {
+        /* ── Materia en curso: Finalizar Cursado ── */
+        const result = await Render.showResultModal(id);
+        if (result === 'cancel') return;
+        
+        // Remove from cursando
+        cursandoCourses = cursandoCourses.filter(c => c !== id);
+
+        if (result === 'approve') {
+            Render.animateApproval(id);
+            await _delay(460);
+            
+            if (modoIntensivo) {
+                intensivoCourses = [...intensivoCourses, id];
+            } else {
+                approvedCourses = [...approvedCourses, id];
+            }
+            
+            // Consumir habilitación si la tenía
+            if (isHabilitada) {
+                habilitadas = habilitadas.filter(c => c !== id);
+            }
+        } else if (result === 'fail') {
+            intentos[id] = (intentos[id] || 0) + 1;
+        } else if (result === 'withdraw') {
+            // Se retiró, no cuenta como intento
+        }
+
     } else if (modoHabilitacion) {
         /* ── MODO HABILITACIÓN ACTIVO: Poner / Quitar habilitación ── */
         if (isHabilitada) {
@@ -100,22 +131,10 @@ async function toggleCourse(id) {
             habilitadas = [...habilitadas, id];
         }
 
-    } else if (isHabilitada) {
-        /* ── Aprobar materia previamente habilitada (click normal) ── */
-        Render.animateApproval(id);
-        await _delay(460);
-        approvedCourses = [...approvedCourses, id];
-        habilitadas = habilitadas.filter(c => c !== id); // Se consume la habilitación
-
-    } else if (modoIntensivo) {
-        /* ── Adelantar en intensivo (bypass prerrequisitos) ── */
-        intensivoCourses = [...intensivoCourses, id];
-
     } else {
-        /* ── Aprobar normalmente (prerrequisitos verificados por render) ── */
-        Render.animateApproval(id);
-        await _delay(460);
-        approvedCourses = [...approvedCourses, id];
+        /* ── Iniciar Cursado ── */
+        // Ya sea en modo normal, intensivo, o habilitada, al hacer clic iniciamos cursado
+        cursandoCourses = [...cursandoCourses, id];
     }
 
     _commit();
@@ -125,11 +144,13 @@ function _commit() {
     Storage.saveProgress(approvedCourses);
     Storage.saveIntensivo(intensivoCourses);
     Storage.saveHabilitadas(habilitadas);
+    Storage.saveCursando(cursandoCourses);
+    Storage.saveIntentos(intentos);
     _refresh();
 }
 
 function _refresh() {
-    Render.malla(approvedCourses, intensivoCourses, habilitadas, modoIntensivo, modoHabilitacion);
+    Render.malla(approvedCourses, intensivoCourses, habilitadas, cursandoCourses, intentos, modoIntensivo, modoHabilitacion);
     Render.stats(_getEffectiveApproved());
     // Re-aplicar filtros activos
     if (activeSpecs.size > 0) Render.applySpecFilter(activeSpecs);
@@ -269,6 +290,8 @@ function _initEvents() {
             approvedCourses  = await Storage.importBackup(file);
             intensivoCourses = Storage.loadIntensivo();
             habilitadas      = Storage.loadHabilitadas();
+            cursandoCourses  = Storage.loadCursando();
+            intentos         = Storage.loadIntentos();
             _commit();
         } catch (err) {
             alert('Error al importar backup:\n' + err.message);
@@ -311,8 +334,10 @@ function _initEvents() {
             approvedCourses  = [];
             intensivoCourses = [];
             habilitadas      = [];
+            cursandoCourses  = [];
+            intentos = {};
             Storage.clearAll();
-            _refresh();
+            _commit();
         }
     });
 }

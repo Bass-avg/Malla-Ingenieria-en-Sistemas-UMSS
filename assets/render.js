@@ -45,13 +45,15 @@ const Render = (() => {
      * @param {string[]} approved          - aprobadas en modo normal
      * @param {string[]} intensivo         - aprobadas en modo intensivo
      * @param {string[]} habilitadas       - habilitadas sin prerrequisitos
+     * @param {string[]} cursando          - actualmente cursando
      * @param {boolean}  modoIntensivo     - si el toggle intensivo está activo
      * @param {boolean}  modoHabilitacion  - si el toggle habilitación está activo
      */
-    function _getState(course, approved, intensivo, habilitadas, modoIntensivo, modoHabilitacion) {
+    function _getState(course, approved, intensivo, habilitadas, cursando, modoIntensivo, modoHabilitacion) {
         const effective = new Set([...approved, ...intensivo]);
         if (intensivo.includes(course.id))                    return 'intensivo';
         if (approved.includes(course.id))                     return 'approved';
+        if (cursando.includes(course.id))                     return 'cursando';
         if (habilitadas.includes(course.id))                  return 'habilitada';
         if (course.reqs.every(r => effective.has(r)))         return 'available';
         if (modoIntensivo)                                    return 'intensivo-available';
@@ -68,9 +70,9 @@ const Render = (() => {
     /* ─────────────────────────────────────────────
        CARD
     ───────────────────────────────────────────── */
-    function _buildCard(course, approved, intensivo, habilitadas, modoIntensivo, modoHabilitacion) {
+    function _buildCard(course, approved, intensivo, habilitadas, cursando, intentos, modoIntensivo, modoHabilitacion) {
         const effective = new Set([...approved, ...intensivo]);
-        const state     = _getState(course, approved, intensivo, habilitadas, modoIntensivo, modoHabilitacion);
+        const state     = _getState(course, approved, intensivo, habilitadas, cursando, modoIntensivo, modoHabilitacion);
         const missing   = _getMissingNames(course, effective);
 
         const card        = document.createElement('div');
@@ -86,14 +88,21 @@ const Render = (() => {
             'intensivo-available':  { cls: 'badge-intensivo-available',    txt: '+ ADELANTAR'  },
             habilitada:             { cls: 'badge-habilitada',             txt: '⚡ HABILITADA' },
             'habilitacion-posible': { cls: 'badge-habilitacion-posible',   txt: '+ HABILITAR'  },
+            cursando:               { cls: 'badge-cursando',               txt: '▶ CURSANDO'   },
         };
         const b = BADGE[state];
+        
+        const count = intentos[course.id];
+        const intentosHtml = (count > 0 && state !== 'approved' && state !== 'intensivo') 
+            ? `<div class="course-intentos">${count}° INTENTO</div>` 
+            : '';
 
         card.innerHTML = `
             <div>
                 <span class="course-code">ID: ${course.id}</span>
                 <span class="course-name">${course.name}</span>
             </div>
+            ${intentosHtml}
             <div class="course-bottom">
                 <span class="course-credits">${course.credits} CR.</span>
                 <span class="course-status-badge ${b.cls}">${b.txt}</span>
@@ -335,8 +344,55 @@ const Render = (() => {
         });
     }
 
+    function showResultModal(courseId) {
+        return new Promise(resolve => {
+            const modal = document.getElementById('resultModal');
+            const desc = document.getElementById('resultModalDesc');
+            const course = COURSES.find(c => c.id === courseId);
+            if (desc && course) {
+                desc.textContent = `¿Cuál fue el resultado de ${course.name}?`;
+            }
+            
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+
+            const btnApprove = document.getElementById('btnResultApprove');
+            const btnFail    = document.getElementById('btnResultFail');
+            const btnCancel  = document.getElementById('btnResultWithdraw');
+
+            // Cleanup previous listeners
+            const cloneApprove = btnApprove.cloneNode(true);
+            const cloneFail    = btnFail.cloneNode(true);
+            const cloneCancel  = btnCancel.cloneNode(true);
+            const cloneModal   = modal.cloneNode(true);
+            
+            btnApprove.replaceWith(cloneApprove);
+            btnFail.replaceWith(cloneFail);
+            btnCancel.replaceWith(cloneCancel);
+            modal.replaceWith(cloneModal);
+
+            const newModal = document.getElementById('resultModal');
+            
+            function close(action) {
+                newModal.classList.remove('active');
+                newModal.setAttribute('aria-hidden', 'true');
+                resolve(action);
+            }
+
+            document.getElementById('btnResultApprove').addEventListener('click', () => close('approve'));
+            document.getElementById('btnResultFail').addEventListener('click', () => close('fail'));
+            document.getElementById('btnResultWithdraw').addEventListener('click', () => close('withdraw'));
+            
+            newModal.addEventListener('click', function onClickOutside(e) {
+                if (e.target === newModal) {
+                    close('cancel');
+                }
+            });
+        });
+    }
+
     /* ─────────────────────────────────────────────
-       MODO INTENSIVO — UI
+       MODOS Y TOGGLES
     ───────────────────────────────────────────── */
     function updateModoIntensivo(active) {
         const btn   = document.getElementById('btnIntensivo');
@@ -375,7 +431,7 @@ const Render = (() => {
     /* ─────────────────────────────────────────────
        GRID PRINCIPAL
     ───────────────────────────────────────────── */
-    function malla(approved, intensivo, habilitadas, modoIntensivo, modoHabilitacion) {
+    function malla(approved, intensivo, habilitadas, cursando, intentos, modoIntensivo, modoHabilitacion) {
         const grid = document.getElementById('mallaGrid');
         grid.innerHTML = '';
 
@@ -403,7 +459,7 @@ const Render = (() => {
 
             // Cards
             cycleArr.forEach(course =>
-                col.appendChild(_buildCard(course, approved, intensivo, habilitadas, modoIntensivo, modoHabilitacion))
+                col.appendChild(_buildCard(course, approved, intensivo, habilitadas, cursando, intentos, modoIntensivo, modoHabilitacion))
             );
             grid.appendChild(col);
         }
@@ -510,16 +566,17 @@ const Render = (() => {
         malla,
         stats,
         applyTheme,
+        showCascadeModal,
+        showConfirmModal,
+        showResultModal,
+        animateApproval,
+        animatePurge,
         updateModoIntensivo,
         updateModoHabilitacion,
         renderSpecBar,
         applySpecFilter,
-        showCascadeModal,
-        showConfirmModal,
-        highlightConnections,
-        clearHighlights,
         applySearch,
-        animateApproval,
-        animatePurge,
+        clearHighlights,
+        highlightConnections
     };
 })();

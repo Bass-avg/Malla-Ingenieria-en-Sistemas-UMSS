@@ -141,7 +141,7 @@ async function toggleCourse(id) {
     _commit();
     
     if (justStartedCursando) {
-        setTimeout(() => Render.triggerCursandoTooltip(justStartedCursando), 50);
+        setTimeout(() => Render.triggerCursandoTooltip(justStartedCursando), 250);
     }
 }
 

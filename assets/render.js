@@ -23,16 +23,18 @@ const Render = (() => {
         let left = rect.left + rect.width / 2 - tipW / 2;
         left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
         tooltipEl.style.left      = `${left}px`;
-        tooltipEl.style.top       = `${rect.top + window.scrollY - 8}px`;
+        tooltipEl.style.top       = `${rect.top - 8}px`;
         tooltipEl.style.transform = 'translateY(-100%)';
         tooltipEl.classList.add('visible');
     }
 
     function _hideTooltip() {
+        if (window._keepTooltipOpen) return;
+        clearTimeout(_tooltipTimer);
         _tooltipTimer = setTimeout(() => {
             tooltipEl.classList.remove('visible');
             tooltipEl.setAttribute('aria-hidden', 'true');
-        }, 80);
+        }, 150);
     }
 
     /* ─────────────────────────────────────────────
@@ -114,6 +116,7 @@ const Render = (() => {
         } else {
             card.addEventListener('click', (e) => {
                 if (missing.length > 0) {
+                    window._keepTooltipOpen = true;
                     _showTooltip(
                         `<div style="margin-bottom:6px;opacity:.8;font-size:.65rem;color:var(--accent-b);">🔒 PRERREQUISITOS FALTANTES:</div>` +
                         missing.map(n => `<span style="opacity:0.9;">• ${n}</span>`).join('<br>'),
@@ -122,6 +125,7 @@ const Render = (() => {
                     // Ocultar al tocar en otro lado en móviles
                     const clearFn = (ev) => {
                         if (!ev.target.closest('.course-card[data-id="' + course.id + '"]')) {
+                            window._keepTooltipOpen = false;
                             _hideTooltip();
                             document.removeEventListener('click', clearFn);
                         }
@@ -175,6 +179,7 @@ const Render = (() => {
     function triggerCursandoTooltip(courseId) {
         const card = document.querySelector(`.course-card[data-id="${courseId}"]`);
         if (!card) return;
+        window._keepTooltipOpen = true;
         _showTooltip(
             `<div style="margin-bottom:4px;opacity:.6;font-size:.6rem;">ACCIÓN REQUERIDA:</div>` +
             `Presiona para marcar como Aprobado o Reprobado`,
@@ -182,6 +187,7 @@ const Render = (() => {
         );
         // Desaparece solo en 3 segundos o al dar clic en otro lado
         const clearFn = () => {
+            window._keepTooltipOpen = false;
             _hideTooltip();
             document.removeEventListener('click', clearFn);
         };

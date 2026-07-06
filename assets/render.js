@@ -133,6 +133,12 @@ const Render = (() => {
                     `Tomar materia sin prerrequisitos`,
                     card
                 );
+            } else if (state === 'cursando') {
+                _showTooltip(
+                    `<div style="margin-bottom:4px;opacity:.6;font-size:.6rem;">ACCIÓN REQUERIDA:</div>` +
+                    `Presiona para marcar como Aprobado o Reprobado`,
+                    card
+                );
             }
             App.onCardHover(course.id, state);
         });

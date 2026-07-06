@@ -928,7 +928,7 @@ h1 {
 
 .header-sub {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 3px;
     color: var(--text-muted);
@@ -954,7 +954,7 @@ h1 {
     border: 1px solid var(--border);
     color: var(--text-muted);
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
@@ -1608,7 +1608,7 @@ h1 {
 /* ─── CONTENIDO DE LA CARD ──────────────────────────── */
 .course-code {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.58rem;
+    font-size: 0.72rem;
     font-weight: 700;
     color: var(--text-dim);
     letter-spacing: 2px;
@@ -1619,7 +1619,7 @@ h1 {
 
 .course-name {
     font-family: 'Oswald', sans-serif;
-    font-size: 0.86rem;
+    font-size: 0.98rem;
     font-weight: 400;
     color: var(--text);
     line-height: 1.25;
@@ -1638,7 +1638,7 @@ h1 {
 
 .course-credits {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.56rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 1px;
     color: var(--text-dim);
@@ -1646,7 +1646,7 @@ h1 {
 
 .course-status-badge {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.56rem;
+    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -1655,7 +1655,7 @@ h1 {
 
 .course-intentos {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--intentos, #ff4444);
     letter-spacing: 1px;
@@ -1721,7 +1721,7 @@ h1 {
 
 .stats-label {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 3px;
     color: var(--text-dim);
@@ -1749,7 +1749,7 @@ h1 {
     color: var(--text-muted);
     border: 1px solid var(--border);
     font-family: 'Rajdhani', sans-serif;
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -1773,7 +1773,7 @@ h1 {
     color: #3a3a3a;
     border: 1px solid #222;
     font-family: 'Special Elite', cursive;
-    font-size: 0.6rem;
+    font-size: 0.75rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     cursor: pointer;
@@ -1876,3 +1876,141 @@ h1 {
 
 /* Stats bar glassmorphism */
 .stats-bar                { border-radius: 16px; }
+
+/* ─── TABLET Y PANTALLAS MEDIANAS (Mejor ajustado) ─── */
+@media (max-width: 900px) {
+    .grid-container {
+        /* En lugar de 1 columna vertical gigante, permitimos 2 columnas en tablet */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 24px 16px 160px;
+    }
+}
+
+/* ─── RESPONSIVE MOBILE EXTREMO (Celulares) ──────────── */
+@media (max-width: 600px) {
+    header {
+        padding: 16px 12px 0;
+    }
+    
+    header h1 {
+        font-size: clamp(1.4rem, 6vw, 2.2rem);
+        letter-spacing: 3px;
+        text-align: center;
+    }
+    
+    .header-sub {
+        text-align: center;
+        letter-spacing: 1px;
+        font-size: 0.75rem;
+    }
+    
+    .header-controls {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 14px;
+    }
+    
+    .btn-theme, .btn-intensivo, .btn-habilitacion {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 16px;
+        font-size: 0.95rem;
+        border-width: 2px;
+    }
+    
+    .grid-container {
+        /* 1 columna para celulares (una debajo de la otra) */
+        grid-template-columns: 1fr;
+        padding: 16px 12px 200px;
+        gap: 30px;
+    }
+    
+    .course-card {
+        padding: 16px 14px;
+        border-width: 2px; /* Mejor borde visible en móvil */
+        border-left-width: 3px;
+    }
+    
+    .course-code {
+        font-size: 0.8rem;
+    }
+    
+    .course-name {
+        font-size: 1.1rem;
+        line-height: 1.35;
+    }
+    
+    .course-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .course-credits, .course-status-badge {
+        font-size: 0.8rem;
+    }
+    
+    .stats-bar {
+        flex-direction: column;
+        border-radius: 12px;
+        padding: 14px 16px;
+        bottom: 0;
+        width: 100%;
+        max-width: 100vw;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        box-shadow: 0 -8px 24px rgba(0,0,0,0.8);
+    }
+    
+    .stats-sync { font-size: 1rem; }
+    
+    .stats-progress { font-size: 1.6rem; }
+    
+    .stats-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .btn-action, .btn-reset {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+    
+    .modal-box, .modal-theme-box {
+        padding: 24px 20px;
+        max-width: 95vw;
+        width: 95vw;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn-modal-cancel, .btn-modal-confirm {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .hud {
+        padding: 16px 12px;
+    }
+    
+    .search-input {
+        padding: 14px 44px 14px 20px;
+        font-size: 1rem;
+    }
+    
+    .spec-pill {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+}

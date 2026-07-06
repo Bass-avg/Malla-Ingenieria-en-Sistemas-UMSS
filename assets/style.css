@@ -334,9 +334,9 @@
     --avail-glow:       rgba(184, 151, 126, 0.25);
     --locked-bg: #c9bfae;
     --locked-border: #a69c8a;
-    --text: #1c1916;
-    --text-dim: #4a443e;
-    --text-muted: #5c554e;
+    --text: #050505;
+    --text-dim: #25221e;
+    --text-muted: #3d3732;
     --area-math:        #9e816a;
     --area-programming: #7a8269;
     --area-systems:     #786b72;
@@ -1431,13 +1431,18 @@ h1 {
     cursor: pointer;
     background: var(--anim-approved-bg);
     border-color: var(--accent-b);
-    box-shadow: inset 0 0 14px var(--anim-shadow-in), 2px 3px 10px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 10px var(--anim-shadow-in), 2px 3px 6px rgba(0,0,0,0.3);
+    opacity: 0.65;
+    filter: grayscale(15%);
+    transition: all 0.3s ease;
 }
 
 .course-card.approved:hover {
     transform: translateY(-5px);
+    opacity: 1;
+    filter: grayscale(0%);
     box-shadow:
-        0 8px 24px var(--accent-glow),
+        0 8px 20px var(--accent-glow),
         inset 0 0 14px var(--anim-shadow-in);
 }
 
@@ -1948,7 +1953,21 @@ h1 {
         flex-direction: column;
         padding: 16px 16px 200px;
         gap: 32px;
-        /* Reseteamos scroll-snap para evitar bugs en la vista vertical */
+    }
+
+    /* MATERIAS SEGUIDORAS (Sticky Scroll) para móviles */
+    .course-card.available,
+    .course-card.intensivo-available,
+    .course-card.habilitacion-posible {
+        position: sticky;
+        top: 16px;
+        z-index: 50;
+        /* Aumentamos la sombra para que se note que flota sobre las demás */
+        box-shadow: 0 8px 25px rgba(0,0,0,0.9), 0 0 12px var(--card-glow);
+    }
+    
+    /* Reseteamos scroll-snap para evitar bugs en la vista vertical */
+    .grid-container {
         scroll-snap-type: none;
         overflow-x: hidden;
         width: 100%;
@@ -2063,4 +2082,318 @@ h1 {
         padding: 8px 14px;
         font-size: 0.85rem;
     }
+}
+
+/* ─── TEMA SECRETO: PRETTY WHEN YOU CRY ──────────────── */
+[data-theme="ldr-pretty"] {
+    --bg: #0a0c10;
+    --surface: #141824;
+    --surface-alt: #1a2030;
+    
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    
+    --border: #1e293b;
+    
+    /* Hollywood Vintage Gold */
+    --accent: #d4af37;
+    --accent-b: #e5c158;
+    --accent-glow: rgba(212, 175, 55, 0.45);
+    
+    /* Hover effects in silver/gold */
+    --card-glow: rgba(148, 163, 184, 0.1);
+    
+    --locked-bg: #0b0f17;
+    --locked-border: #161f30;
+    
+    --status-approved: #243422;
+    --status-cursando: #18283a;
+    --status-available: var(--surface-alt);
+    --status-locked: var(--locked-bg);
+    
+    /* Areas en tonos melancólicos pastel/grisáceos */
+    --area-math: #475569;
+    --area-programming: #334155;
+    --area-systems: #1e293b;
+    --area-software: #64748b;
+    --area-networks: #475569;
+    --area-management: #94a3b8;
+    --area-languages: #64748b;
+    --area-elective: #cbd5e1;
+}
+
+/* ─── OVERRIDES VISUALES EXCLUSIVOS PARA LDR-PRETTY ──────────────── */
+/* Fondo cinemático humeante (radial gradient) */
+[data-theme="ldr-pretty"] body {
+    background: radial-gradient(circle at 50% 0%, #101524 0%, #050608 100%) !important;
+    background-attachment: fixed !important;
+}
+
+/* Título con textura metálica dorada */
+[data-theme="ldr-pretty"] .header-brand h1 {
+    background: linear-gradient(to right, #e2e8f0 0%, #d4af37 50%, #e5c158 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.4) !important;
+    letter-spacing: 3px !important;
+}
+
+/* Subtítulo estilo película clásica */
+[data-theme="ldr-pretty"] .header-sub {
+    font-style: italic !important;
+    opacity: 0.8 !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
+}
+
+/* Glassmorphism en las materias y bordes luminosos */
+[data-theme="ldr-pretty"] .course-card {
+    background: rgba(20, 24, 36, 0.55) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(212, 175, 55, 0.15) !important;
+    border-left: 4px solid var(--accent) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5) !important;
+    transition: all 0.4s ease !important;
+}
+
+[data-theme="ldr-pretty"] .course-card:hover {
+    border-color: rgba(212, 175, 55, 0.7) !important;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(212, 175, 55, 0.1) !important;
+    transform: translateY(-2px) scale(1.01) !important;
+}
+
+/* Badges con gradientes líquidos */
+[data-theme="ldr-pretty"] .course-status-badge {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9) !important;
+}
+
+[data-theme="ldr-pretty"] .course-status-badge.status-approved {
+    background: linear-gradient(135deg, #182615 0%, #302607 100%) !important;
+    border-color: #d4af37 !important;
+    color: #fcd34d !important;
+}
+
+[data-theme="ldr-pretty"] .course-status-badge.status-cursando {
+    background: linear-gradient(135deg, #0b1424 0%, #203554 100%) !important;
+    border-color: #94a3b8 !important;
+    color: #e2e8f0 !important;
+}
+
+/* Modal exclusividad "Top Secret" */
+[data-theme="ldr-pretty"] .modal-box {
+    background: rgba(15, 20, 30, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.15) !important;
+}
+
+[data-theme="ldr-pretty"] .modal-title {
+    color: var(--accent) !important;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ─── ANIMACIONES Y FILTROS (VIBE: ULTRAVIOLENCE / PRETTY WHEN YOU CRY) ─── */
+/* Animación de latido melancólico para el título */
+@keyframes ldrTitlePulse {
+    0% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+    50% { text-shadow: 0 0 45px rgba(212, 175, 55, 0.6), 0 0 15px rgba(226, 232, 240, 0.3); }
+    100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+}
+
+[data-theme="ldr-pretty"] .header-brand h1 {
+    animation: ldrTitlePulse 5s infinite alternate !important;
+}
+
+/* Marca de agua poética de la canción */
+[data-theme="ldr-pretty"] body::before {
+    content: "I'm pretty when I cry...";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8vw;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-style: italic;
+    color: rgba(212, 175, 55, 0.025);
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 8px;
+    text-align: center;
+}
+
+/* Animación de destello "Lágrima Dorada" al pasar el mouse por las materias */
+@keyframes tearDropGlow {
+    0% { 
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), inset 0 0 10px rgba(226, 232, 240, 0.05); 
+        border-color: rgba(212, 175, 55, 0.5);
+    }
+    100% { 
+        box-shadow: 0 0 40px rgba(212, 175, 55, 0.5), inset 0 0 25px rgba(226, 232, 240, 0.15); 
+        border-color: rgba(212, 175, 55, 0.9);
+    }
+}
+
+[data-theme="ldr-pretty"] .course-card:hover {
+    animation: tearDropGlow 1.5s infinite alternate !important;
+}
+
+/* Filtro de Ruido Fotográfico Vintage (Grano de película) para toda la página */
+[data-theme="ldr-pretty"] body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    /* Crea un patrón de ruido estático sutil como película antigua */
+    background: repeating-radial-gradient(rgba(0,0,0,0) 0%, rgba(255,255,255,0.02) 1px, rgba(0,0,0,0) 2px);
+    opacity: 0.8;
+}
+
+
+
+
+/* ════════════════════════════════════════════════════════════════
+   EXTREME LDR-PRETTY: THE CINEMATIC OVERHAUL (MATTE & CURVED)
+   ════════════════════════════════════════════════════════════════ */
+
+/* NOTA: Tipografía y Curvas originales se mantienen, se aplican colores MATE */
+
+/* Lluvia de Lágrimas Constante (Fondo Animado) */
+@keyframes tearsFall {
+    0% { background-position: 0% 0%, 30% -100px, 70% -50px; }
+    100% { background-position: 0% 1500px, 30% 1400px, 70% 1450px; }
+}
+[data-theme="ldr-pretty"] body {
+    background-color: #030406 !important;
+    /* Red superpuesta como telaraña/película, colores mate */
+    background-image: 
+        linear-gradient(rgba(188, 165, 106, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(188, 165, 106, 0.02) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, #101524 0%, #030406 100%) !important;
+    background-size: 30px 30px, 30px 30px, 100% 100% !important;
+}
+/* Pseudo-elemento exclusivo para la lluvia */
+[data-theme="ldr-pretty"] body::before {
+    content: "I'm pretty when I cry...";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8vw;
+    font-style: italic;
+    color: rgba(188, 165, 106, 0.06); /* Oro Mate transparente un poco más visible */
+    z-index: 9000;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 8px;
+    text-align: center;
+}
+[data-theme="ldr-pretty"] body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 9001;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(1px 20px at 10% 10%, rgba(226, 232, 240, 0.3) 50%, transparent 50%),
+        radial-gradient(2px 30px at 40% 30%, rgba(188, 165, 106, 0.25) 50%, transparent 50%),
+        radial-gradient(1.5px 15px at 80% 20%, rgba(226, 232, 240, 0.2) 50%, transparent 50%);
+    background-size: 200px 1500px, 300px 1500px, 250px 1500px;
+    -webkit-animation: tearsFall 15s linear infinite !important;
+    animation: tearsFall 15s linear infinite !important;
+}
+
+/* Rediseño de Botones (Estilo Mate) */
+[data-theme="ldr-pretty"] .btn-intensivo, 
+[data-theme="ldr-pretty"] .theme-btn,
+[data-theme="ldr-pretty"] .btn-modal-confirm,
+[data-theme="ldr-pretty"] .btn-modal-cancel {
+    background: transparent !important;
+    border: 1px solid #bca56a !important; /* Matte Gold */
+    color: #bca56a !important;
+    transition: all 0.4s ease !important;
+    box-shadow: none !important; /* Eliminamos el brillo/glow */
+}
+[data-theme="ldr-pretty"] .btn-intensivo:hover, 
+[data-theme="ldr-pretty"] .theme-btn:hover,
+[data-theme="ldr-pretty"] .btn-modal-confirm:hover {
+    background: #bca56a !important;
+    color: #030406 !important;
+    box-shadow: none !important; /* Sin glow metálico */
+}
+[data-theme="ldr-pretty"] .btn-modal-cancel {
+    border-color: #64748b !important;
+    color: #94a3b8 !important;
+}
+[data-theme="ldr-pretty"] .btn-modal-cancel:hover {
+    background: #64748b !important;
+    color: #030406 !important;
+}
+
+/* Scrollbar Exclusivo LDR (Mate) */
+[data-theme="ldr-pretty"]::-webkit-scrollbar-track {
+    background: #030406 !important;
+    border-left: 1px solid rgba(188, 165, 106, 0.1);
+}
+[data-theme="ldr-pretty"]::-webkit-scrollbar-thumb {
+    background: #bca56a !important;
+}
+
+/* Header (Sin glow metálico, oro mate puro) */
+[data-theme="ldr-pretty"] .header-row {
+    border-bottom: 1px solid rgba(188, 165, 106, 0.3);
+    padding-bottom: 25px;
+    margin-bottom: 10px;
+}
+[data-theme="ldr-pretty"] .header-brand h1 {
+    font-size: 2.8rem !important;
+    letter-spacing: 5px !important;
+    color: #bca56a !important;
+    text-shadow: none !important; /* Mate = sin brillo */
+    background: none !important; /* Sin gradientes metálicos */
+    -webkit-text-fill-color: #bca56a !important;
+}
+[data-theme="ldr-pretty"] .header-sub {
+    font-size: 0.9rem !important;
+    letter-spacing: 4px !important;
+    color: #94a3b8 !important;
+    text-shadow: none !important;
+}
+
+/* Materias (Se mantienen las curvas, aplicamos colores mates) */
+[data-theme="ldr-pretty"] .course-card {
+    border: 1px solid rgba(188, 165, 106, 0.3) !important;
+    border-bottom: 3px solid #bca56a !important;
+    background: linear-gradient(180deg, rgba(20,24,36,0.5) 0%, rgba(5,6,8,0.9) 100%) !important;
+    box-shadow: none !important; /* Sin glow exterior */
+}
+[data-theme="ldr-pretty"] .course-card:hover {
+    border-color: rgba(188, 165, 106, 0.6) !important;
+    box-shadow: none !important; /* Sin glow exterior */
+}
+[data-theme="ldr-pretty"] .course-code {
+    color: #bca56a !important;
+}
+
+/* Badges (Mate y sin bordes afilados) */
+[data-theme="ldr-pretty"] .course-status-badge {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+[data-theme="ldr-pretty"] .course-status-badge.status-approved {
+    border: 1px solid #bca56a !important;
+    color: #bca56a !important;
+    background: rgba(188, 165, 106, 0.1) !important;
+}
+[data-theme="ldr-pretty"] .course-status-badge.status-cursando {
+    border: 1px solid #e2e8f0 !important;
+    color: #e2e8f0 !important;
+    background: rgba(226, 232, 240, 0.05) !important;
 }

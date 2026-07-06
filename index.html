@@ -112,11 +112,16 @@
                     <button class="theme-btn" data-set-theme="ldr-ultra"><span class="theme-emoji">🚬</span> ULTRAVIOLENCE</button>
                     <button class="theme-btn" data-set-theme="ldr-nfr"><span class="theme-emoji">🌅</span> N.F. ROCKWELL!</button>
                     <button class="theme-btn" data-set-theme="ldr-ocean"><span class="theme-emoji">🚇</span> OCEAN BLVD</button>
+                    <button class="theme-btn" id="secretThemeBtn" data-set-theme="ldr-pretty" style="display: none;"><span class="theme-emoji">💧</span> PRETTY WHEN YOU CRY</button>
                 </div>
             </div>
 
             <div class="modal-actions" style="margin-top:24px;">
                 <button class="btn-modal-cancel" id="btnCloseSettingsModal">CERRAR</button>
+            </div>
+            <!-- Easter Egg Trigger -->
+            <div style="text-align: center; margin-top: 15px;">
+                <span id="secretMouse" style="cursor: pointer; opacity: 0.15; font-size: 1.2rem; transition: opacity 0.3s;" title="¿Laura?">🐭</span>
             </div>
         </div>
     </div>
@@ -250,6 +255,22 @@
         </div>
     </div>
 
+    </div>
+
+    <!-- ════════════════════════════════════════
+         MODAL EASTER EGG (RIDDLE)
+    ════════════════════════════════════════ -->
+    <div id="riddleModal" class="modal-backdrop" aria-hidden="true" style="z-index: 10000;">
+        <div class="modal-box" style="text-align: center; border: 2px solid var(--accent); box-shadow: 0 0 30px var(--accent-glow);">
+            <h2 class="modal-title" style="color: var(--accent); letter-spacing: 4px;">TOP SECRET</h2>
+            <p class="modal-desc" style="font-size: 1.1rem; margin-top: 10px;">¿Nuestra Artista en Común?</p>
+            <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px;">(Pista: Nomenclatura PascalCase)</p>
+            <input type="password" id="riddleInput" class="search-input" style="width: 100%; margin-bottom: 20px; text-align: center; font-size: 1.1rem;" placeholder="Escribe aquí...">
+            <div class="modal-actions">
+                <button class="btn-modal-confirm" id="btnRiddleSubmit" style="width: 100%;">VERIFICAR</button>
+                <button class="btn-modal-cancel" id="btnRiddleCancel" style="width: 100%;">CANCELAR</button>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts — orden importante -->

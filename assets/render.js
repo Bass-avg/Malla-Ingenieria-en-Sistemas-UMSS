@@ -108,17 +108,35 @@ const Render = (() => {
                 <span class="course-status-badge ${b.cls}">${b.txt}</span>
             </div>`;
 
-        /* Interacción — todo excepto locked */
+        /* Interacción */
         if (state !== 'locked') {
             card.addEventListener('click', () => App.onCardClick(course.id));
+        } else {
+            card.addEventListener('click', (e) => {
+                if (missing.length > 0) {
+                    _showTooltip(
+                        `<div style="margin-bottom:6px;opacity:.8;font-size:.65rem;color:var(--accent-b);">🔒 PRERREQUISITOS FALTANTES:</div>` +
+                        missing.map(n => `<span style="opacity:0.9;">• ${n}</span>`).join('<br>'),
+                        card
+                    );
+                    // Ocultar al tocar en otro lado en móviles
+                    const clearFn = (ev) => {
+                        if (!ev.target.closest('.course-card[data-id="' + course.id + '"]')) {
+                            _hideTooltip();
+                            document.removeEventListener('click', clearFn);
+                        }
+                    };
+                    setTimeout(() => document.addEventListener('click', clearFn), 50);
+                }
+            });
         }
 
         /* Tooltip en hover */
         card.addEventListener('mouseenter', () => {
             if (state === 'locked' && missing.length > 0) {
                 _showTooltip(
-                    `<div style="margin-bottom:4px;opacity:.6;font-size:.6rem;">FALTA CLEARANCE:</div>` +
-                    missing.map(n => `• ${n}`).join('<br>'),
+                    `<div style="margin-bottom:6px;opacity:.8;font-size:.65rem;color:var(--accent-b);">🔒 PRERREQUISITOS FALTANTES:</div>` +
+                    missing.map(n => `<span style="opacity:0.9;">• ${n}</span>`).join('<br>'),
                     card
                 );
             } else if (state === 'intensivo-available') {
@@ -149,6 +167,26 @@ const Render = (() => {
         });
 
         return card;
+    }
+
+    /* ─────────────────────────────────────────────
+       PROGRAMMATIC TOOLTIPS
+    ───────────────────────────────────────────── */
+    function triggerCursandoTooltip(courseId) {
+        const card = document.querySelector(`.course-card[data-id="${courseId}"]`);
+        if (!card) return;
+        _showTooltip(
+            `<div style="margin-bottom:4px;opacity:.6;font-size:.6rem;">ACCIÓN REQUERIDA:</div>` +
+            `Presiona para marcar como Aprobado o Reprobado`,
+            card
+        );
+        // Desaparece solo en 3 segundos o al dar clic en otro lado
+        const clearFn = () => {
+            _hideTooltip();
+            document.removeEventListener('click', clearFn);
+        };
+        setTimeout(() => document.addEventListener('click', clearFn), 100);
+        setTimeout(clearFn, 3000);
     }
 
     /* ─────────────────────────────────────────────
@@ -583,6 +621,7 @@ const Render = (() => {
         applySpecFilter,
         applySearch,
         clearHighlights,
-        highlightConnections
+        highlightConnections,
+        triggerCursandoTooltip
     };
 })();

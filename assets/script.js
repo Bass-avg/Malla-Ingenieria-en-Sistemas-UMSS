@@ -135,9 +135,14 @@ async function toggleCourse(id) {
         /* ── Iniciar Cursado ── */
         // Ya sea en modo normal, intensivo, o habilitada, al hacer clic iniciamos cursado
         cursandoCourses = [...cursandoCourses, id];
+        var justStartedCursando = id;
     }
 
     _commit();
+    
+    if (justStartedCursando) {
+        setTimeout(() => Render.triggerCursandoTooltip(justStartedCursando), 50);
+    }
 }
 
 function _commit() {
@@ -352,3 +357,81 @@ document.addEventListener('DOMContentLoaded', () => {
     _refresh();
     _initEvents();
 });
+
+
+// ════════════════════════════════════════
+// EASTER EGG LOGIC
+// ════════════════════════════════════════
+(function() {
+    const secretMouse = document.getElementById('secretMouse');
+    const secretThemeBtn = document.getElementById('secretThemeBtn');
+    
+    const riddleModal = document.getElementById('riddleModal');
+    const riddleInput = document.getElementById('riddleInput');
+    const btnRiddleSubmit = document.getElementById('btnRiddleSubmit');
+    const btnRiddleCancel = document.getElementById('btnRiddleCancel');
+    
+    // Comprobar estado guardado
+    if (localStorage.getItem('unlockedLdrPretty') === 'true') {
+        if (secretThemeBtn) secretThemeBtn.style.display = 'block';
+        if (secretMouse) secretMouse.style.display = 'none';
+    }
+
+    if (secretMouse && riddleModal) {
+        // Abrir el modal secreto
+        secretMouse.addEventListener('click', () => {
+            riddleInput.value = '';
+            riddleModal.classList.add('active');
+            riddleModal.setAttribute('aria-hidden', 'false');
+            setTimeout(() => riddleInput.focus(), 100);
+        });
+        
+        // Función de verificación
+        const checkRiddle = () => {
+            const answer = riddleInput.value;
+            if (answer && answer.trim() === "BillieEilish") {
+                // Desbloqueo exitoso
+                localStorage.setItem('unlockedLdrPretty', 'true');
+                
+                riddleModal.classList.remove('active');
+                riddleModal.setAttribute('aria-hidden', 'true');
+                
+                secretMouse.style.display = 'none';
+                secretThemeBtn.style.display = 'block';
+                
+                alert("Has desbloqueado el tema exclusivo: Pretty When You Cry 💧✨");
+                
+                // Aplicar el tema inmediatamente
+                secretThemeBtn.click();
+            } else {
+                riddleInput.style.border = '2px solid red';
+                riddleInput.style.color = 'red';
+                setTimeout(() => {
+                    riddleInput.style.border = '';
+                    riddleInput.style.color = '';
+                }, 800);
+            }
+        };
+
+        btnRiddleSubmit.addEventListener('click', checkRiddle);
+        
+        // Enter para verificar
+        riddleInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') checkRiddle();
+        });
+
+        // Cancelar y cerrar
+        btnRiddleCancel.addEventListener('click', () => {
+            riddleModal.classList.remove('active');
+            riddleModal.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Efecto hover sutil
+        secretMouse.addEventListener('mouseenter', () => {
+            secretMouse.style.opacity = '1';
+        });
+        secretMouse.addEventListener('mouseleave', () => {
+            secretMouse.style.opacity = '0.15';
+        });
+    }
+})();

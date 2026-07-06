@@ -59,15 +59,35 @@
     </div>
 
     <!-- ════════════════════════════════════════
-         MODAL DE TEMAS
+         MODAL DE SETTINGS (THEMES + DATA SYNC)
     ════════════════════════════════════════ -->
-    <div class="modal-backdrop" id="themeModal"
+    <div class="modal-backdrop" id="settingsModal"
          role="dialog" aria-modal="true"
-         aria-labelledby="themeModalTitle" aria-hidden="true">
+         aria-labelledby="settingsModalTitle" aria-hidden="true">
         <div class="modal-box modal-theme-box">
-            <h2 class="modal-title" id="themeModalTitle">COMMAND CENTER: THEMES</h2>
-            <p class="modal-desc">SELECCIONE EL ENTORNO VISUAL</p>
+            <h2 class="modal-title" id="settingsModalTitle">COMMAND CENTER: SETTINGS</h2>
             
+            <!-- SECCIÓN: DATA SYNC -->
+            <div class="settings-section">
+                <div class="stats-sync" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+                    <div>
+                        <span class="stats-dot" aria-hidden="true"></span>
+                        <span class="stats-label">DATA SYNC</span>
+                    </div>
+                    <span class="stats-progress" id="progressText" style="font-size: 1.4rem;">0 / 0</span>
+                </div>
+                <div class="stats-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <button class="btn-action" id="btnBackup" title="Exportar progreso">⬇ BACKUP</button>
+                    <label class="btn-action" for="restoreInput" title="Importar progreso" tabindex="0" role="button" style="text-align:center;">⬆ RESTORE</label>
+                    <input type="file" id="restoreInput" accept=".json" style="display:none" aria-label="Seleccionar archivo de backup">
+                    <button class="btn-reset" id="btnReset" style="grid-column: 1 / -1; margin-top:4px;">CLEAR DATABASE</button>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px 0;">
+
+            <!-- SECCIÓN: THEMES -->
+            <p class="modal-desc" style="text-align:center;">SELECCIONE EL ENTORNO VISUAL</p>
             <div class="theme-grid">
                 <div class="theme-group">
                     <h3>SISTEMAS CORE</h3>
@@ -96,7 +116,7 @@
             </div>
 
             <div class="modal-actions" style="margin-top:24px;">
-                <button class="btn-modal-cancel" id="btnCloseThemeModal">CERRAR</button>
+                <button class="btn-modal-cancel" id="btnCloseSettingsModal">CERRAR</button>
             </div>
         </div>
     </div>
@@ -129,11 +149,11 @@
                     <span class="habilitacion-icon">⚡</span>
                     <span class="habilitacion-label">HABILITAR</span>
                 </button>
-                <button class="btn-theme" id="btnThemeToggle"
-                        title="Abrir panel de temas"
-                        aria-label="Abrir panel de temas">
-                    <span id="themeIcon" aria-hidden="true"></span>
-                    <span id="themeLabel">THEMES</span>
+                <button class="btn-theme" id="btnSettingsToggle"
+                        title="Command Center Settings"
+                        aria-label="Abrir Configuraciones">
+                    <span aria-hidden="true">⚙</span>
+                    <span>SETTINGS</span>
                 </button>
             </div>
         </div>
@@ -213,26 +233,7 @@
         <!-- Renderizado dinámicamente por render.js -->
     </main>
 
-    <!-- ════════════════════════════════════════
-         BARRA DE ESTADO (fixed bottom)
-    ════════════════════════════════════════ -->
-    <div class="stats-bar" role="status">
-        <div class="stats-sync">
-            <span class="stats-dot" aria-hidden="true"></span>
-            <span class="stats-label">DATA SYNC</span>
-        </div>
-        <span class="stats-progress" id="progressText">0 / 0</span>
-        <div class="stats-actions">
-            <button class="btn-action" id="btnBackup"
-                    title="Exportar progreso como JSON">⬇ BACKUP</button>
-            <label class="btn-action" for="restoreInput"
-                   title="Importar progreso desde JSON"
-                   tabindex="0" role="button">⬆ RESTORE</label>
-            <input type="file" id="restoreInput" accept=".json"
-                   style="display:none" aria-label="Seleccionar archivo de backup">
-            <button class="btn-reset" id="btnReset">CLEAR DATABASE</button>
-        </div>
-    </div>
+
 
     <!-- ════════════════════════════════════════
          MODAL DE RESULTADO (CURSANDO)
@@ -247,6 +248,8 @@
                 <button class="btn-modal-cancel" id="btnResultWithdraw">CANCELAR</button>
             </div>
         </div>
+    </div>
+
     </div>
 
     <!-- Scripts — orden importante -->

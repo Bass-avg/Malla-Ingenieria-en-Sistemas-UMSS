@@ -24,12 +24,12 @@
     --avail-b:          #d4a017;       /* Oro ámbar cálido */
     --avail-glow:       rgba(212, 160, 23, 0.22);
 
-    --locked-bg:        #040404;
-    --locked-border:    #1c1414;
+    --locked-bg: #100b0b;
+    --locked-border: #2a1e1e;
 
-    --text:             #cdc5c0;       /* Blanco ligeramente cálido */
-    --text-dim:         #302828;       /* Gris oscuro cálido */
-    --text-muted:       #5c4f4f;       /* Gris medio cálido */
+    --text: #e5e0dc;       /* Blanco ligeramente cálido */
+    --text-dim: #7a6a6a;       /* Gris oscuro cálido */
+    --text-muted: #948282;       /* Gris medio cálido */
 
     /* Áreas — tonos más cálidos/oscuros */
     --area-math:        #6b21a8;
@@ -86,12 +86,12 @@
     --avail-b:          #00d4aa;
     --avail-glow:       rgba(0, 212, 170, 0.22);
 
-    --locked-bg:        #020710;
-    --locked-border:    #0a1828;
+    --locked-bg: #051221;
+    --locked-border: #132742;
 
-    --text:             #a8c8e8;
-    --text-dim:         #1e3a5a;
-    --text-muted:       #2e5a7a;
+    --text: #d8eaff;
+    --text-dim: #6b98c9;
+    --text-muted: #88b1db;
 
     --area-math:        #0ea5e9;
     --area-programming: #3b82f6;
@@ -139,11 +139,11 @@
     --avail:            #03dac6;
     --avail-b:          #70efde;
     --avail-glow:       rgba(3, 218, 198, 0.22);
-    --locked-bg:        #121212;
-    --locked-border:    #242424;
-    --text:             #e1e1e1;
-    --text-dim:         #9e9e9e;
-    --text-muted:       #757575;
+    --locked-bg: #181818;
+    --locked-border: #333333;
+    --text: #ffffff;
+    --text-dim: #b3b3b3;
+    --text-muted: #8c8c8c;
     --area-math:        #ff8a65;
     --area-programming: #4dd0e1;
     --area-systems:     #81c784;
@@ -187,11 +187,11 @@
     --avail:            #018786;
     --avail-b:          #005457;
     --avail-glow:       rgba(1, 135, 134, 0.15);
-    --locked-bg:        #fafafa;
-    --locked-border:    #eeeeee;
-    --text:             #121212;
-    --text-dim:         #555555;
-    --text-muted:       #888888;
+    --locked-bg: #eaeaea;
+    --locked-border: #cccccc;
+    --text: #000000;
+    --text-dim: #444444;
+    --text-muted: #666666;
     --area-math:        #e64a19;
     --area-programming: #0097a7;
     --area-systems:     #388e3c;
@@ -236,11 +236,11 @@
     --avail:            #cc2929;
     --avail-b:          #ff3333;
     --avail-glow:       rgba(255, 51, 51, 0.25);
-    --locked-bg:        #0f0404;
-    --locked-border:    #240909;
-    --text:             #fceeed;
-    --text-dim:         #e3a3a3;
-    --text-muted:       #b56b6b;
+    --locked-bg: #1f0b0b;
+    --locked-border: #4a1515;
+    --text: #ffffff;
+    --text-dim: #ffbaba;
+    --text-muted: #fca0a0;
     --area-math:        #cc8400;
     --area-programming: #d9991a;
     --area-systems:     #a62121;
@@ -284,11 +284,11 @@
     --avail:            #666666;
     --avail-b:          #999999;
     --avail-glow:       rgba(153, 153, 153, 0.22);
-    --locked-bg:        #050505;
-    --locked-border:    #0f140c;
-    --text:             #e8f4e5;
-    --text-dim:         #788f72;
-    --text-muted:       #4d5e49;
+    --locked-bg: #0d120a;
+    --locked-border: #1c2617;
+    --text: #ffffff;
+    --text-dim: #a3c29d;
+    --text-muted: #7c9e75;
     --area-math:        #6b8e23;
     --area-programming: #2e8b57;
     --area-systems:     #00fa9a;
@@ -332,11 +332,11 @@
     --avail:            #b8977e;
     --avail-b:          #a17b5f;
     --avail-glow:       rgba(184, 151, 126, 0.25);
-    --locked-bg:        #cfc7bc;
-    --locked-border:    #bcb4a8;
-    --text:             #3b3631;
-    --text-dim:         #665f57;
-    --text-muted:       #8c8479;
+    --locked-bg: #c9bfae;
+    --locked-border: #a69c8a;
+    --text: #1c1916;
+    --text-dim: #4a443e;
+    --text-muted: #5c554e;
     --area-math:        #9e816a;
     --area-programming: #7a8269;
     --area-systems:     #786b72;
@@ -380,11 +380,11 @@
     --avail:            #00e5ff;
     --avail-b:          #66f0ff;
     --avail-glow:       rgba(0, 229, 255, 0.25);
-    --locked-bg:        #020b17;
-    --locked-border:    #072045;
-    --text:             #dbeaff;
-    --text-dim:         #7da9e6;
-    --text-muted:       #4c7cb8;
+    --locked-bg: #061226;
+    --locked-border: #10274f;
+    --text: #ffffff;
+    --text-dim: #a3c9fc;
+    --text-muted: #7ca6db;
     --area-math:        #1f6ebf;
     --area-programming: #318ceb;
     --area-systems:     #00bfff;
@@ -429,11 +429,11 @@
     --avail:            #cca86e;
     --avail-b:          #e6c38a;
     --avail-glow:       rgba(204, 168, 110, 0.22);
-    --locked-bg:        #080505;
-    --locked-border:    #1f1412;
-    --text:             #e8dcc5;
-    --text-dim:         #a69076;
-    --text-muted:       #7a634b;
+    --locked-bg: #140d0c;
+    --locked-border: #301f1d;
+    --text: #fcf2e3;
+    --text-dim: #cfb89f;
+    --text-muted: #a38c73;
     --area-math:        #b84d52;
     --area-programming: #9e6d44;
     --area-systems:     #786450;
@@ -477,11 +477,11 @@
     --avail:            #7a7a7a;
     --avail-b:          #999999;
     --avail-glow:       rgba(122, 122, 122, 0.2);
-    --locked-bg:        #0f0f0f;
-    --locked-border:    #242424;
-    --text:             #d4d4d4;
-    --text-dim:         #757575;
-    --text-muted:       #545454;
+    --locked-bg: #171717;
+    --locked-border: #333333;
+    --text: #ffffff;
+    --text-dim: #b5b5b5;
+    --text-muted: #8c8c8c;
     --area-math:        #858585;
     --area-programming: #949494;
     --area-systems:     #7a7a7a;
@@ -525,11 +525,11 @@
     --avail:            #4daabf;
     --avail-b:          #66cae0;
     --avail-glow:       rgba(77, 170, 191, 0.25);
-    --locked-bg:        #0a1014;
-    --locked-border:    #1b2d38;
-    --text:             #e0dcd3;
-    --text-dim:         #8ea3ab;
-    --text-muted:       #597682;
+    --locked-bg: #121c21;
+    --locked-border: #243945;
+    --text: #ffffff;
+    --text-dim: #a7bdc7;
+    --text-muted: #7c939e;
     --area-math:        #c27c53;
     --area-programming: #5097a8;
     --area-systems:     #7f9e6d;
@@ -573,11 +573,11 @@
     --avail:            #665b4c;
     --avail-b:          #857763;
     --avail-glow:       rgba(102, 91, 76, 0.25);
-    --locked-bg:        #12100e;
-    --locked-border:    #2b2420;
-    --text:             #d4caba;
-    --text-dim:         #8f8373;
-    --text-muted:       #615749;
+    --locked-bg: #1f1b18;
+    --locked-border: #38312c;
+    --text: #fcf4e8;
+    --text-dim: #b3a696;
+    --text-muted: #8f8272;
     --area-math:        #826d57;
     --area-programming: #636b58;
     --area-systems:     #6e5f52;
@@ -1787,54 +1787,6 @@ h1 {
     box-shadow: 0 0 14px var(--accent-glow);
 }
 
-/* ─── RESPONSIVE ────────────────────────────────────── */
-/* ─── RESPONSIVE ────────────────────────────────────── */
-@media (max-width: 900px) {
-    header {
-        padding: 20px 16px 0;
-    }
-
-    .header-controls {
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .hud {
-        padding: 12px 16px;
-        gap: 14px;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .grid-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 24px 16px 130px;
-    }
-
-    .theme-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .modal-theme-box {
-        padding: 24px 20px;
-        width: 90vw;
-    }
-
-    .stats-bar {
-        bottom: 10px;
-        padding: 10px 14px;
-        gap: 12px;
-        max-width: calc(100vw - 20px);
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .stats-actions {
-        gap: 6px;
-    }
-}
-
 /* ═══ ROUNDED DESIGN SYSTEM v2.1 ═══════════════════════════
    Centraliza todos los border-radius del sistema.
    Nada de bordes cortantes — todo fluido y redondeado.
@@ -1874,23 +1826,79 @@ h1 {
 /* Tooltip */
 .global-tooltip           { border-radius: 10px; }
 
-/* Stats bar glassmorphism */
-.stats-bar                { border-radius: 16px; }
+/* ─── RESPONSIVE ────────────────────────────────────── */
+/* ─── RESPONSIVE ────────────────────────────────────── */
+
+/* Aplicamos Scroll Snapping al contenedor principal para que parezca una app nativa */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(9, 240px);
+    gap: 24px;
+    padding: 36px 28px 160px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 28px;
+    -webkit-overflow-scrolling: touch; /* Suavidad en iOS */
+}
+
+.cycle-column {
+    scroll-snap-align: start;
+}
 
 /* ─── TABLET Y PANTALLAS MEDIANAS (Mejor ajustado) ─── */
 @media (max-width: 900px) {
+    header {
+        padding: 20px 16px 0;
+    }
+
+    .header-controls {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .hud {
+        padding: 12px 16px;
+        gap: 14px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
     .grid-container {
-        /* En lugar de 1 columna vertical gigante, permitimos 2 columnas en tablet */
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+        /* Mantenemos el scroll horizontal en tablet, columnas un poco más anchas para lectura */
+        grid-template-columns: repeat(9, 280px);
         padding: 24px 16px 160px;
+        scroll-padding-left: 16px;
+    }
+
+    .theme-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-theme-box {
+        padding: 24px 20px;
+        width: 90vw;
+    }
+
+    .stats-bar {
+        bottom: 10px;
+        padding: 10px 14px;
+        gap: 12px;
+        max-width: calc(100vw - 20px);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .stats-actions {
+        gap: 6px;
     }
 }
 
 /* ─── RESPONSIVE MOBILE EXTREMO (Celulares) ──────────── */
+
+/* ─── RESPONSIVE MOBILE EXTREMO (Celulares) ──────────── */
 @media (max-width: 600px) {
     header {
-        padding: 16px 12px 0;
+        padding: 16px 16px 0;
     }
     
     header h1 {
@@ -1905,88 +1913,126 @@ h1 {
         font-size: 0.75rem;
     }
     
-    .header-controls {
+    .header-row {
         flex-direction: column;
+        align-items: center;
+        gap: 12px;
         width: 100%;
-        margin-top: 14px;
+        margin-bottom: 16px;
+    }
+    
+    /* Diseño Estético para Botones del Header (Grid) */
+    .header-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        margin-top: 16px;
+    }
+    
+    .btn-theme {
+        grid-column: 1 / -1; /* Ocupa ambas columnas */
     }
     
     .btn-theme, .btn-intensivo, .btn-habilitacion {
         width: 100%;
         justify-content: center;
-        padding: 14px 16px;
-        font-size: 0.95rem;
-        border-width: 2px;
+        padding: 12px 14px;
+        font-size: 0.85rem;
+        border-width: 1px;
     }
     
     .grid-container {
-        /* 1 columna para celulares (una debajo de la otra) */
-        grid-template-columns: 1fr;
-        padding: 16px 12px 200px;
-        gap: 30px;
+        /* Volvemos a la columna vertical que le gustó al usuario */
+        display: flex;
+        flex-direction: column;
+        padding: 16px 16px 200px;
+        gap: 32px;
+        /* Reseteamos scroll-snap para evitar bugs en la vista vertical */
+        scroll-snap-type: none;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+
+    .cycle-column {
+        scroll-snap-align: none;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .course-card {
-        padding: 16px 14px;
-        border-width: 2px; /* Mejor borde visible en móvil */
-        border-left-width: 3px;
+        padding: 18px 16px;
+        border-width: 1px;
+        border-left-width: 4px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Hacemos que las materias bloqueadas destaquen un poco más */
+    .course-card.locked {
+        opacity: 0.95;
+        border: 1px dashed var(--locked-border);
+        border-left: 4px solid var(--locked-border);
     }
     
     .course-code {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     
     .course-name {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         line-height: 1.35;
     }
     
     .course-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        margin-top: 12px;
+        flex-direction: row; /* En vertical, hay espacio para que estén en fila */
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 14px;
     }
     
     .course-credits, .course-status-badge {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     
     .stats-bar {
         flex-direction: column;
-        border-radius: 12px;
-        padding: 14px 16px;
-        bottom: 0;
-        width: 100%;
-        max-width: 100vw;
-        border-bottom: none;
-        border-left: none;
-        border-right: none;
-        box-shadow: 0 -8px 24px rgba(0,0,0,0.8);
+        border-radius: 16px;
+        padding: 16px 20px;
+        bottom: 12px;
+        width: calc(100vw - 24px);
+        left: 12px;
+        transform: none;
+        border: 1px solid var(--accent);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.9);
+        box-sizing: border-box;
     }
     
-    .stats-sync { font-size: 1rem; }
+    .stats-sync { font-size: 1.1rem; }
     
-    .stats-progress { font-size: 1.6rem; }
+    .stats-progress { font-size: 1.8rem; }
     
     .stats-actions {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        gap: 12px;
     }
     
     .btn-action, .btn-reset {
         width: 100%;
         justify-content: center;
         padding: 12px;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     
     .modal-box, .modal-theme-box {
         padding: 24px 20px;
         max-width: 95vw;
         width: 95vw;
+        box-sizing: border-box;
     }
     
     .modal-actions {
@@ -2001,16 +2047,20 @@ h1 {
     }
     
     .hud {
-        padding: 16px 12px;
+        padding: 16px;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .search-input {
         padding: 14px 44px 14px 20px;
         font-size: 1rem;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .spec-pill {
         padding: 8px 14px;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
 }

@@ -171,12 +171,12 @@ const App = {
 
 function _initEvents() {
 
-    /* Toggle de tema (Modal) */
-    const themeModal = document.getElementById('themeModal');
+    /* Toggle de Configuración (Modal) */
+    const settingsModal = document.getElementById('settingsModal');
     
-    document.getElementById('btnThemeToggle').addEventListener('click', () => {
-        themeModal.classList.add('active');
-        themeModal.setAttribute('aria-hidden', 'false');
+    document.getElementById('btnSettingsToggle').addEventListener('click', () => {
+        settingsModal.classList.add('active');
+        settingsModal.setAttribute('aria-hidden', 'false');
         
         // Highlight active theme button
         document.querySelectorAll('.theme-btn').forEach(b => {
@@ -184,15 +184,15 @@ function _initEvents() {
         });
     });
 
-    document.getElementById('btnCloseThemeModal').addEventListener('click', () => {
-        themeModal.classList.remove('active');
-        themeModal.setAttribute('aria-hidden', 'true');
+    document.getElementById('btnCloseSettingsModal').addEventListener('click', () => {
+        settingsModal.classList.remove('active');
+        settingsModal.setAttribute('aria-hidden', 'true');
     });
 
-    themeModal.addEventListener('click', (e) => {
+    settingsModal.addEventListener('click', (e) => {
         // Click outside box to close
-        if (e.target === themeModal) {
-            document.getElementById('btnCloseThemeModal').click();
+        if (e.target === settingsModal) {
+            document.getElementById('btnCloseSettingsModal').click();
         }
 
         // Click on a theme button
@@ -246,11 +246,11 @@ function _initEvents() {
     document.addEventListener('keydown', (e) => {
         if (e.key !== 'Escape') return;
         const modal = document.getElementById('cascadeModal');
-        const themeM = document.getElementById('themeModal');
+        const settingsM = document.getElementById('settingsModal');
         if (modal.classList.contains('active')) {
             document.getElementById('btnCancelCascade').click();
-        } else if (themeM.classList.contains('active')) {
-            document.getElementById('btnCloseThemeModal').click();
+        } else if (settingsM.classList.contains('active')) {
+            document.getElementById('btnCloseSettingsModal').click();
         } else if (searchInput.value) {
             searchClear.click();
         }

@@ -1,42 +1,243 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" data-theme="batman">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malla Curricular - Ingenieria en Sistemas UMSS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@400;700&display=swap"
-        rel="stylesheet">
+    <meta name="description" content="Herramienta de seguimiento del avance académico en Ingeniería de Sistemas — UMSS. Visualiza tu malla curricular, prerrequisitos y progreso por semestre.">
+    <meta name="theme-color" content="#0a0a0a" id="metaThemeColor">
+    <title>Malla Curricular — Ingeniería en Sistemas · UMSS</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@300;400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32"  href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"  href="assets/icons/favicon-16x16.png">
     <link rel="manifest" href="assets/icons/site.webmanifest">
     <link rel="shortcut icon" href="assets/icons/favicon.ico">
-    <link rel="stylesheet" href="assets/style.css">
-</head>
 
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/style.css">
+
+    <!-- Previene el flash de tema incorrecto al cargar -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('vengeance_theme');
+                if (t) document.documentElement.setAttribute('data-theme', JSON.parse(t));
+            } catch (e) {}
+        })();
+    </script>
+</head>
 <body>
 
-    <div class="overlay"></div>
+    <!-- Textura de overlay -->
+    <div class="overlay" aria-hidden="true"></div>
 
+    <!-- Tooltip global (posicionado fuera del clip-path de las cards) -->
+    <div id="globalTooltip" class="global-tooltip" role="tooltip" aria-hidden="true"></div>
+
+    <!-- ════════════════════════════════════════
+         MODAL DE CASCADA / CONFIRMACIÓN
+    ════════════════════════════════════════ -->
+    <div class="modal-backdrop" id="cascadeModal"
+         role="dialog" aria-modal="true"
+         aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-box">
+            <span class="modal-warning-icon" aria-hidden="true">⚠</span>
+            <h2 class="modal-title" id="modalTitle">SYSTEM WARNING</h2>
+            <p class="modal-desc" id="modalDesc">Confirmar acción:</p>
+            <ul class="modal-list" id="cascadeList"></ul>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel"  id="btnCancelCascade">CANCELAR</button>
+                <button class="btn-modal-confirm" id="btnConfirmCascade">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         MODAL DE TEMAS
+    ════════════════════════════════════════ -->
+    <div class="modal-backdrop" id="themeModal"
+         role="dialog" aria-modal="true"
+         aria-labelledby="themeModalTitle" aria-hidden="true">
+        <div class="modal-box modal-theme-box">
+            <h2 class="modal-title" id="themeModalTitle">COMMAND CENTER: THEMES</h2>
+            <p class="modal-desc">SELECCIONE EL ENTORNO VISUAL</p>
+            
+            <div class="theme-grid">
+                <div class="theme-group">
+                    <h3>SISTEMAS CORE</h3>
+                    <button class="theme-btn" data-set-theme="batman"><span class="theme-emoji">🦇</span> THE BATMAN (OSCURO)</button>
+                    <button class="theme-btn" data-set-theme="navy"><span class="theme-emoji">🌊</span> AZUL MARINO PROFUNDO</button>
+                </div>
+                <div class="theme-group">
+                    <h3>CLÁSICOS</h3>
+                    <button class="theme-btn" data-set-theme="classic-dark"><span class="theme-emoji">🌙</span> MODO OSCURO</button>
+                    <button class="theme-btn" data-set-theme="classic-light"><span class="theme-emoji">☀️</span> MODO CLARO</button>
+                </div>
+                <div class="theme-group">
+                    <h3>BILLIE EILISH</h3>
+                    <button class="theme-btn" data-set-theme="be-dsam"><span class="theme-emoji">🔥</span> DON'T SMILE AT ME</button>
+                    <button class="theme-btn" data-set-theme="be-fallasleep"><span class="theme-emoji">🕷️</span> WWAFA, WDWG?</button>
+                    <button class="theme-btn" data-set-theme="be-happier"><span class="theme-emoji">🕊️</span> HAPPIER THAN EVER</button>
+                    <button class="theme-btn" data-set-theme="be-hmhas"><span class="theme-emoji">🌊</span> HIT ME HARD AND SOFT</button>
+                </div>
+                <div class="theme-group">
+                    <h3>LANA DEL REY</h3>
+                    <button class="theme-btn" data-set-theme="ldr-born"><span class="theme-emoji">🌹</span> BORN TO DIE</button>
+                    <button class="theme-btn" data-set-theme="ldr-ultra"><span class="theme-emoji">🚬</span> ULTRAVIOLENCE</button>
+                    <button class="theme-btn" data-set-theme="ldr-nfr"><span class="theme-emoji">🌅</span> N.F. ROCKWELL!</button>
+                    <button class="theme-btn" data-set-theme="ldr-ocean"><span class="theme-emoji">🚇</span> OCEAN BLVD</button>
+                </div>
+            </div>
+
+            <div class="modal-actions" style="margin-top:24px;">
+                <button class="btn-modal-cancel" id="btnCloseThemeModal">CERRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         HEADER
+    ════════════════════════════════════════ -->
     <header>
-        <h1>MALLA CURRICULAR</h1>
-        <p>DETECCIÓN DE AVANCE // - INGENIERÍA DE SISTEMAS</p>
+        <div class="header-row">
+            <div class="header-brand">
+                <h1>MALLA CURRICULAR</h1>
+                <p class="header-sub">
+                    DETECCIÓN DE AVANCE
+                    <span class="sep" aria-hidden="true">·</span>
+                    INGENIERÍA DE SISTEMAS — UMSS
+                </p>
+            </div>
+            <div class="header-controls">
+                <button class="btn-intensivo" id="btnIntensivo"
+                        title="Marcar materias tomadas en invierno o verano"
+                        aria-label="Activar modo intensivo"
+                        aria-pressed="false">
+                    <span class="intensivo-icon">☀</span>
+                    <span class="intensivo-label">INTENSIVO</span>
+                </button>
+                <button class="btn-habilitacion" id="btnHabilitacion"
+                        title="Habilitar materia sin prerrequisitos"
+                        aria-label="Activar modo habilitación"
+                        aria-pressed="false">
+                    <span class="habilitacion-icon">⚡</span>
+                    <span class="habilitacion-label">HABILITAR</span>
+                </button>
+                <button class="btn-theme" id="btnThemeToggle"
+                        title="Abrir panel de temas"
+                        aria-label="Abrir panel de temas">
+                    <span id="themeIcon" aria-hidden="true"></span>
+                    <span id="themeLabel">THEMES</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- HUD de estadísticas -->
+        <div class="hud" role="status" aria-live="polite" aria-label="Estadísticas de avance">
+            <div class="hud-item">
+                <span class="hud-val" id="hudApproved">0</span>
+                <span class="hud-lbl">APROBADAS</span>
+            </div>
+            <div class="hud-divider" aria-hidden="true"></div>
+            <div class="hud-item">
+                <span class="hud-val available" id="hudAvailable">0</span>
+                <span class="hud-lbl">DISPONIBLES</span>
+            </div>
+            <div class="hud-divider" aria-hidden="true"></div>
+            <div class="hud-item">
+                <span class="hud-val dim" id="hudLocked">0</span>
+                <span class="hud-lbl">BLOQUEADAS</span>
+            </div>
+            <div class="hud-divider" aria-hidden="true"></div>
+            <div class="hud-progress-wrap">
+                <div class="hud-progress-bar"
+                     id="hudProgressBar"
+                     role="progressbar"
+                     aria-label="Porcentaje de avance"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div class="hud-progress-fill" id="hudProgressFill"></div>
+                </div>
+                <div class="hud-progress-foot">
+                    <span class="hud-lbl">AVANCE TOTAL</span>
+                    <span class="hud-percent" id="hudPercent">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buscador -->
+        <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input
+                type="search"
+                id="searchInput"
+                class="search-input"
+                placeholder="BUSCAR MATERIA, CÓDIGO O ÁREA..."
+                autocomplete="off"
+                spellcheck="false"
+                aria-label="Buscar materia">
+            <button class="search-clear" id="searchClear"
+                    aria-label="Limpiar búsqueda"
+                    style="display:none">✕</button>
+        </div>
+
+        <!-- Leyenda de áreas -->
+        <div class="area-legend" aria-label="Leyenda de áreas temáticas">
+            <span class="legend-item" data-area="math">        <span class="legend-dot"></span>MATEMÁTICA</span>
+            <span class="legend-item" data-area="programming"> <span class="legend-dot"></span>PROGRAMACIÓN</span>
+            <span class="legend-item" data-area="systems">     <span class="legend-dot"></span>SISTEMAS</span>
+            <span class="legend-item" data-area="software">    <span class="legend-dot"></span>SOFTWARE</span>
+            <span class="legend-item" data-area="networks">    <span class="legend-dot"></span>REDES</span>
+            <span class="legend-item" data-area="management">  <span class="legend-dot"></span>GESTIÓN</span>
+            <span class="legend-item" data-area="languages">   <span class="legend-dot"></span>IDIOMAS</span>
+            <span class="legend-item" data-area="elective">    <span class="legend-dot"></span>ELECTIVO</span>
+        </div>
+
+        <!-- Barra de filtros por especialización -->
+        <div class="spec-bar" id="specBar"
+             role="toolbar"
+             aria-label="Filtrar por especialización">
+            <!-- Generado dinámicamente por render.js -->
+        </div>
     </header>
 
-    <div class="grid-container" id="mallaGrid">
-        <!-- Cargado dinámicamente -->
+    <!-- ════════════════════════════════════════
+         GRID PRINCIPAL
+    ════════════════════════════════════════ -->
+    <main class="grid-container" id="mallaGrid" aria-label="Malla curricular">
+        <!-- Renderizado dinámicamente por render.js -->
+    </main>
+
+    <!-- ════════════════════════════════════════
+         BARRA DE ESTADO (fixed bottom)
+    ════════════════════════════════════════ -->
+    <div class="stats-bar" role="status">
+        <div class="stats-sync">
+            <span class="stats-dot" aria-hidden="true"></span>
+            <span class="stats-label">DATA SYNC</span>
+        </div>
+        <span class="stats-progress" id="progressText">0 / 0</span>
+        <div class="stats-actions">
+            <button class="btn-action" id="btnBackup"
+                    title="Exportar progreso como JSON">⬇ BACKUP</button>
+            <label class="btn-action" for="restoreInput"
+                   title="Importar progreso desde JSON"
+                   tabindex="0" role="button">⬆ RESTORE</label>
+            <input type="file" id="restoreInput" accept=".json"
+                   style="display:none" aria-label="Seleccionar archivo de backup">
+            <button class="btn-reset" id="btnReset">CLEAR DATABASE</button>
+        </div>
     </div>
 
-    <div class="stats-bar">
-        <div style="color: #666; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px;">Data Sync:</div>
-        <span id="progressText">0/0</span>
-        <button class="btn-reset" onclick="resetProgress()">Clear Database</button>
-    </div>
-
-
+    <!-- Scripts — orden importante -->
+    <script src="assets/data.js"></script>
+    <script src="assets/storage.js"></script>
+    <script src="assets/render.js"></script>
     <script src="assets/script.js"></script>
-
 </body>
-
 </html>

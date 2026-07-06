@@ -1,162 +1,329 @@
-const courses = [
-    // SEMESTRE 1
-    { id: 'ALG1', name: 'Álgebra I', reqs: [], cycle: 1 },
-    { id: 'CAL1', name: 'Cálculo I', reqs: [], cycle: 1 },
-    { id: 'PROG1', name: 'Introducción a la Programación', reqs: [], cycle: 1 },
-    { id: 'MET1', name: 'Metodología de la Inv. y Técnicas de Com.', reqs: [], cycle: 1 },
-    { id: 'FISG', name: 'Física General', reqs: [], cycle: 1 },
-    { id: 'ING1', name: 'Inglés I', reqs: [], cycle: 1 },
+'use strict';
 
-    // SEMESTRE 2
-    { id: 'ALG2', name: 'Álgebra II', reqs: ['ALG1'], cycle: 2 },
-    { id: 'CAL2', name: 'Cálculo II', reqs: ['CAL1'], cycle: 2 },
-    { id: 'MATD', name: 'Matemática Discreta', reqs: ['CAL1'], cycle: 2 },
-    { id: 'ELEM', name: 'Elementos de Prog. y Estructura de Datos', reqs: ['MET1', 'PROG1'], cycle: 2 },
-    { id: 'ARQ', name: 'Arquitectura de Computadoras', reqs: ['FISG'], cycle: 2 },
+/* ═══════════════════════════════════════════════
+   ORCHESTRATOR — Malla Curricular v2.1
+   Estado: aprobadas, intensivo, modoIntensivo,
+           tema, especializaciones activas
+   Depende de: data.js → storage.js → render.js
+   ═══════════════════════════════════════════════ */
 
-    // SEMESTRE 3
-    { id: 'EST1', name: 'Estadística I', reqs: ['ALG2'], cycle: 3 },
-    { id: 'EDIF', name: 'Ecuaciones Diferenciales', reqs: ['CAL2'], cycle: 3 },
-    { id: 'CNUM', name: 'Cálculo Numérico', reqs: ['MATD'], cycle: 3 },
-    { id: 'MTP', name: 'Métodos y Técnicas de Programación', reqs: ['ELEM'], cycle: 3 },
-    { id: 'BD1', name: 'Base de Datos I', reqs: ['ELEM'], cycle: 3 },
-    { id: 'CELE', name: 'Circuitos Electrónicos', reqs: ['ARQ'], cycle: 3 },
+// ── Estado global ────────────────────────────────
+let approvedCourses  = Storage.loadProgress();
+let intensivoCourses = Storage.loadIntensivo();
+let habilitadas      = Storage.loadHabilitadas();
+let currentTheme     = Storage.loadTheme();
+let modoIntensivo    = false;          // se resetea al recargar
+let modoHabilitacion = false;          // se resetea al recargar
+let activeSpecs      = new Set();      // se resetea al recargar
 
-    // SEMESTRE 4
-    { id: 'EST2', name: 'Estadística II', reqs: ['EST1'], cycle: 4 },
-    { id: 'INV1', name: 'Investigación Operativa I', reqs: ['EDIF'], cycle: 4 },
-    { id: 'CONT', name: 'Contabilidad Básica', reqs: ['CNUM'], cycle: 4 },
-    { id: 'SI1', name: 'Sistemas de Información I', reqs: ['MTP'], cycle: 4 },
-    { id: 'BD2', name: 'Base de Datos II', reqs: ['BD1'], cycle: 4 },
-    { id: 'TSO', name: 'Taller de Sistemas Operativos', reqs: ['CELE'], cycle: 4 },
+// ── Helpers ──────────────────────────────────────
 
-    // SEMESTRE 5
-    { id: 'MERC', name: 'Mercadotecnia', reqs: ['EST2'], cycle: 5 },
-    { id: 'INV2', name: 'Investigación Operativa II', reqs: ['INV1'], cycle: 5 },
-    { id: 'SIS1', name: 'Sistemas I', reqs: ['CONT'], cycle: 5 },
-    { id: 'SI2', name: 'Sistemas de Información II', reqs: ['SI1'], cycle: 5 },
-    { id: 'TBD', name: 'Taller de Base de Datos', reqs: ['BD2'], cycle: 5 },
-    { id: 'ASO', name: 'Aplicación de Sistemas Operativos', reqs: ['TSO'], cycle: 5 },
-    { id: 'ING2', name: 'Inglés II', reqs: ['ING1'], cycle: 5 },
-
-    // SEMESTRE 6
-    { id: 'SECO', name: 'Sistemas Económicos', reqs: ['MERC'], cycle: 6 },
-    { id: 'SIM', name: 'Simulación de Sistemas', reqs: ['INV2'], cycle: 6 },
-    { id: 'SIS2', name: 'Sistemas II', reqs: ['SIS1'], cycle: 6 },
-    { id: 'ISW', name: 'Ingeniería de Software', reqs: ['SI2'], cycle: 6 },
-    { id: 'IA', name: 'Inteligencia Artificial', reqs: ['TBD'], cycle: 6 },
-    { id: 'RED', name: 'Redes de Computadoras', reqs: ['ASO'], cycle: 6 },
-
-    // SEMESTRE 7
-    { id: 'PLAN', name: 'Planificación y Eval. de Proyectos', reqs: ['SECO'], cycle: 7 },
-    { id: 'DIN', name: 'Dinámica de Sistemas', reqs: ['SIM'], cycle: 7 },
-    { id: 'TS1', name: 'Tópicos Selectos I', reqs: ['SIS2'], cycle: 7 },
-    { id: 'TISW', name: 'Taller de Ingeniería de Software', reqs: ['ISW'], cycle: 7 },
-    { id: 'GCAL', name: 'Gestión de Calidad de Software', reqs: ['IA'], cycle: 7 },
-    { id: 'RADV', name: 'Redes Avanzadas de Computadoras', reqs: ['RED'], cycle: 7 },
-
-    // SEMESTRE 8
-    { id: 'GEE', name: 'Gestión Estratégica de Empresas', reqs: ['PLAN'], cycle: 8 },
-    { id: 'TMS', name: 'Taller de Modelación y Simulación', reqs: ['DIN'], cycle: 8 },
-    { id: 'TS2', name: 'Tópicos Selectos II', reqs: ['TS1', 'TISW'], cycle: 8 },
-    { id: 'METP', name: 'Metodología y Planif. de Proy. de Grado', reqs: ['TS1', 'TISW'], cycle: 8 },
-    { id: 'EAUD', name: 'Evaluación y Auditoría de Sistemas', reqs: ['GCAL'], cycle: 8 },
-    { id: 'SEG', name: 'Seguridad de Sistemas', reqs: ['RADV'], cycle: 8 },
-    { id: 'ING3', name: 'Inglés III', reqs: ['ING2'], cycle: 8 },
-
-    // SEMESTRE 9
-    { id: 'TS3', name: 'Tópicos Selectos III', reqs: ['GEE'], cycle: 9 },
-    { id: 'TS4', name: 'Tópicos Selectos IV', reqs: ['TMS'], cycle: 9 },
-    { id: 'PRAC', name: 'Práctica Empresarial', reqs: ['TS2', 'METP'], cycle: 9 },
-    { id: 'PFN', name: 'Proyecto Final', reqs: ['TS2', 'METP'], cycle: 9 },
-    { id: 'TS5', name: 'Tópicos Selectos V', reqs: ['EAUD'], cycle: 9 },
-    { id: 'TS6', name: 'Tópicos Selectos VI', reqs: ['TS2', 'METP', 'SEG'], cycle: 9 }
-];
-
-let approvedCourses = JSON.parse(localStorage.getItem('vengeance_progress')) || [];
-
-function renderMalla() {
-    const grid = document.getElementById('mallaGrid');
-    grid.innerHTML = '';
-
-    for (let i = 1; i <= 9; i++) {
-        const column = document.createElement('div');
-        column.className = 'cycle-column';
-
-        const header = document.createElement('div');
-        header.className = 'cycle-header';
-        header.innerText = `SEMESTRE ${i}`;
-        column.appendChild(header);
-
-        const cycleCourses = courses.filter(c => c.cycle === i);
-        cycleCourses.forEach(course => {
-            const isApproved = approvedCourses.includes(course.id);
-            const missingReqs = course.reqs.filter(reqId => !approvedCourses.includes(reqId));
-            const isLocked = missingReqs.length > 0;
-
-            const card = document.createElement('div');
-            card.className = `course-card ${isApproved ? 'approved' : ''} ${isLocked ? 'locked' : ''}`;
-
-            const missingNames = missingReqs.map(id => {
-                const match = courses.find(c => c.id === id);
-                return match ? match.name : id;
-            });
-
-            card.innerHTML = `
-                <span class="course-code">ACCESS_ID: ${course.id}</span>
-                <span class="course-name">${course.name}</span>
-                ${isLocked ? `<div class="tooltip">MISSING CLEARANCE: <br>${missingNames.join(', ')}</div>` : ''}
-            `;
-
-            if (!isLocked) {
-                card.onclick = () => toggleCourse(course.id);
-            }
-
-            column.appendChild(card);
-        });
-
-        grid.appendChild(column);
-    }
+/** Unión de aprobadas normales + intensivo: base real para prerrequisitos */
+function _getEffectiveApproved() {
+    return [...new Set([...approvedCourses, ...intensivoCourses])];
 }
 
-function toggleCourse(id) {
-    if (approvedCourses.includes(id)) {
-        approvedCourses = approvedCourses.filter(c => c !== id);
-    } else {
-        approvedCourses.push(id);
-    }
-    saveAndRefresh();
+function _delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function saveAndRefresh() {
-    // Lógica de cascada: si desapruebas una base, se pierden las avanzadas
+// ── Lógica de cascada ─────────────────────────────
+
+/**
+ * Calcula qué IDs del array `effectiveApproved` se perderían si se quita `courseId`.
+ */
+function getCascadeImpact(courseId, effectiveApproved) {
+    let hypo    = effectiveApproved.filter(id => id !== courseId);
     let changed = true;
     while (changed) {
-        const before = approvedCourses.length;
-        approvedCourses = approvedCourses.filter(cid => {
-            const c = courses.find(item => item.id === cid);
-            return c.reqs.every(r => approvedCourses.includes(r));
+        const before = hypo.length;
+        hypo = hypo.filter(cid => {
+            const c = COURSES.find(item => item.id === cid);
+            return c ? c.reqs.every(r => hypo.includes(r)) : true;
         });
-        changed = approvedCourses.length !== before;
+        changed = hypo.length !== before;
+    }
+    return effectiveApproved.filter(id => id !== courseId && !hypo.includes(id));
+}
+
+/**
+ * Tras modificar approved / intensivo, recalcula la cascada sobre la unión
+ * y redistribuye los IDs a sus arrays de origen.
+ */
+function _applyFullCascade() {
+    let effective = [...new Set([...approvedCourses, ...intensivoCourses])];
+    let changed   = true;
+    while (changed) {
+        const before = effective.length;
+        effective = effective.filter(cid => {
+            const c = COURSES.find(item => item.id === cid);
+            return c ? c.reqs.every(r => effective.includes(r)) : true;
+        });
+        changed = effective.length !== before;
+    }
+    // Redistribuir: cada ID vuelve a su array original si aún es válido
+    approvedCourses  = approvedCourses.filter(id => effective.includes(id));
+    intensivoCourses = intensivoCourses.filter(id => effective.includes(id));
+}
+
+// ── Toggle principal ──────────────────────────────
+
+async function toggleCourse(id) {
+    const isIntensivo  = intensivoCourses.includes(id);
+    const isApproved   = approvedCourses.includes(id);
+    const isHabilitada = habilitadas.includes(id);
+    const effective    = _getEffectiveApproved();
+
+    if (isIntensivo || isApproved) {
+        /* ── Quitar materia (normal o intensivo) ── */
+        const impact = getCascadeImpact(id, effective);
+
+        if (impact.length > 0) {
+            const confirmed = await Render.showCascadeModal(id, impact);
+            if (!confirmed) return;
+            Render.animatePurge(impact);
+            await _delay(330);
+        }
+
+        if (isIntensivo) {
+            intensivoCourses = intensivoCourses.filter(c => c !== id);
+        } else {
+            approvedCourses = approvedCourses.filter(c => c !== id);
+        }
+        _applyFullCascade();
+
+    } else if (modoHabilitacion) {
+        /* ── MODO HABILITACIÓN ACTIVO: Poner / Quitar habilitación ── */
+        if (isHabilitada) {
+            habilitadas = habilitadas.filter(c => c !== id);
+        } else {
+            habilitadas = [...habilitadas, id];
+        }
+
+    } else if (isHabilitada) {
+        /* ── Aprobar materia previamente habilitada (click normal) ── */
+        Render.animateApproval(id);
+        await _delay(460);
+        approvedCourses = [...approvedCourses, id];
+        habilitadas = habilitadas.filter(c => c !== id); // Se consume la habilitación
+
+    } else if (modoIntensivo) {
+        /* ── Adelantar en intensivo (bypass prerrequisitos) ── */
+        intensivoCourses = [...intensivoCourses, id];
+
+    } else {
+        /* ── Aprobar normalmente (prerrequisitos verificados por render) ── */
+        Render.animateApproval(id);
+        await _delay(460);
+        approvedCourses = [...approvedCourses, id];
     }
 
-    localStorage.setItem('vengeance_progress', JSON.stringify(approvedCourses));
-    renderMalla();
-    updateStats();
+    _commit();
 }
 
-function updateStats() {
-    document.getElementById('progressText').innerText = `${approvedCourses.length}/${courses.length}`;
+function _commit() {
+    Storage.saveProgress(approvedCourses);
+    Storage.saveIntensivo(intensivoCourses);
+    Storage.saveHabilitadas(habilitadas);
+    _refresh();
 }
 
-function resetProgress() {
-    if (confirm('SYSTEM ADVISORY: This will erase all curriculum data. Proceed?')) {
-        approvedCourses = [];
-        saveAndRefresh();
-    }
+function _refresh() {
+    Render.malla(approvedCourses, intensivoCourses, habilitadas, modoIntensivo, modoHabilitacion);
+    Render.stats(_getEffectiveApproved());
+    // Re-aplicar filtros activos
+    if (activeSpecs.size > 0) Render.applySpecFilter(activeSpecs);
+    const q = document.getElementById('searchInput')?.value || '';
+    if (q.trim()) Render.applySearch(q);
 }
 
-window.onload = () => {
-    renderMalla();
-    updateStats();
+// ── Hooks expuestos para render.js ────────────────
+
+// eslint-disable-next-line no-unused-vars
+const App = {
+    onCardClick(id)        { toggleCourse(id); },
+    onCardHover(id, state) { Render.highlightConnections(id, state); },
+    onCardLeave()          { Render.clearHighlights(); },
 };
+
+// ── Inicialización de eventos UI ──────────────────
+
+function _initEvents() {
+
+    /* Toggle de tema (Modal) */
+    const themeModal = document.getElementById('themeModal');
+    
+    document.getElementById('btnThemeToggle').addEventListener('click', () => {
+        themeModal.classList.add('active');
+        themeModal.setAttribute('aria-hidden', 'false');
+        
+        // Highlight active theme button
+        document.querySelectorAll('.theme-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.setTheme === currentTheme);
+        });
+    });
+
+    document.getElementById('btnCloseThemeModal').addEventListener('click', () => {
+        themeModal.classList.remove('active');
+        themeModal.setAttribute('aria-hidden', 'true');
+    });
+
+    themeModal.addEventListener('click', (e) => {
+        // Click outside box to close
+        if (e.target === themeModal) {
+            document.getElementById('btnCloseThemeModal').click();
+        }
+
+        // Click on a theme button
+        const btn = e.target.closest('.theme-btn');
+        if (btn) {
+            currentTheme = btn.dataset.setTheme;
+            Storage.saveTheme(currentTheme);
+            Render.applyTheme(currentTheme);
+            
+            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    });
+
+    /* Toggle MODO INTENSIVO */
+    document.getElementById('btnIntensivo').addEventListener('click', () => {
+        modoIntensivo = !modoIntensivo;
+        if (modoIntensivo) modoHabilitacion = false;
+        Render.updateModoIntensivo(modoIntensivo);
+        Render.updateModoHabilitacion(modoHabilitacion);
+        _refresh();
+    });
+
+    /* Toggle MODO HABILITACIÓN */
+    document.getElementById('btnHabilitacion')?.addEventListener('click', () => {
+        modoHabilitacion = !modoHabilitacion;
+        if (modoHabilitacion) modoIntensivo = false;
+        Render.updateModoIntensivo(modoIntensivo);
+        Render.updateModoHabilitacion(modoHabilitacion);
+        _refresh();
+    });
+
+    /* Búsqueda */
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+
+    searchInput.addEventListener('input', () => {
+        const q = searchInput.value;
+        searchClear.style.display = q ? 'inline-flex' : 'none';
+        Render.applySearch(q);
+    });
+
+    searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClear.style.display = 'none';
+        Render.applySearch('');
+        searchInput.focus();
+    });
+
+    /* ESC: cierra modal o limpia búsqueda */
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const modal = document.getElementById('cascadeModal');
+        const themeM = document.getElementById('themeModal');
+        if (modal.classList.contains('active')) {
+            document.getElementById('btnCancelCascade').click();
+        } else if (themeM.classList.contains('active')) {
+            document.getElementById('btnCloseThemeModal').click();
+        } else if (searchInput.value) {
+            searchClear.click();
+        }
+    });
+
+    /* Clic en fondo del modal = cancelar */
+    document.getElementById('cascadeModal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            document.getElementById('btnCancelCascade').click();
+        }
+    });
+
+    /* Filtros de especialización (delegación de eventos en la barra) */
+    document.getElementById('specBar').addEventListener('click', (e) => {
+        const pill = e.target.closest('.spec-pill');
+        if (!pill) return;
+        const spec = pill.dataset.spec;
+        if (spec === 'all') {
+            activeSpecs.clear();
+        } else {
+            activeSpecs.has(spec) ? activeSpecs.delete(spec) : activeSpecs.add(spec);
+        }
+        Render.applySpecFilter(activeSpecs);
+    });
+
+    /* Backup */
+    document.getElementById('btnBackup').addEventListener('click', () => {
+        Storage.exportBackup();
+    });
+
+    /* Restore */
+    const restoreInput = document.getElementById('restoreInput');
+    restoreInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        try {
+            approvedCourses  = await Storage.importBackup(file);
+            intensivoCourses = Storage.loadIntensivo();
+            habilitadas      = Storage.loadHabilitadas();
+            _commit();
+        } catch (err) {
+            alert('Error al importar backup:\n' + err.message);
+        }
+        e.target.value = '';
+    });
+
+    /* Accesibilidad: label restore con teclado */
+    document.querySelector('label[for="restoreInput"]')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            restoreInput.click();
+        }
+    });
+
+    /* Reset — limpia todo (normal + intensivo) */
+    document.getElementById('btnReset').addEventListener('click', async () => {
+        const effective = _getEffectiveApproved();
+        if (effective.length === 0) return;
+
+        // Construir lista con indicador de intensivo/habilitada
+        let allNames = effective.map(id => {
+            const c    = COURSES.find(c => c.id === id);
+            const tipo = intensivoCourses.includes(id) ? ' ☀' : '';
+            return c ? `${c.name}${tipo}` : id;
+        });
+        
+        habilitadas.forEach(id => {
+            const c = COURSES.find(c => c.id === id);
+            allNames.push(c ? `${c.name} ⚡` : `${id} ⚡`);
+        });
+
+        const confirmed = await Render.showConfirmModal({
+            title: 'CLEAR DATABASE',
+            desc:  'Esta acción borrará <strong>todo el progreso</strong> y permisos. Sin retorno:',
+            items: allNames,
+        });
+
+        if (confirmed) {
+            approvedCourses  = [];
+            intensivoCourses = [];
+            habilitadas      = [];
+            Storage.clearAll();
+            _refresh();
+        }
+    });
+}
+
+// ── Arranque ──────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+    Render.applyTheme(currentTheme);
+    Render.renderSpecBar();
+    Render.updateModoIntensivo(modoIntensivo);
+    Render.updateModoHabilitacion(modoHabilitacion);
+    _refresh();
+    _initEvents();
+});

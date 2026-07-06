@@ -1,35 +1,43 @@
 # 🦇 Malla Curricular — Universidad Mayor de San Simón
-> **//DETECCIÓN DE AVANCE//** · Ingeniería en Sistemas
+> **//DETECCIÓN DE AVANCE v2.1//** · Ingeniería en Sistemas
 
-[![Version](https://img.shields.io/badge/Version-2.0.0-red.svg?style=for-the-badge&logo=batman)](https://github.com/Bass-avg/Malla-Ingenieria-en-Sistemas-UMSS)
-[![Tech](https://img.shields.io/badge/Built%20With-Vanilla%20JS%20%7C%20CSS%20Dual%20Theme-8b0000?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Version](https://img.shields.io/badge/Version-2.1.0-red.svg?style=for-the-badge&logo=batman)](https://github.com/Bass-avg/Malla-Ingenieria-en-Sistemas-UMSS)
+[![Tech](https://img.shields.io/badge/Built%20With-Vanilla%20JS%20%7C%20CSS%20Multi--Theme-8b0000?style=for-the-badge)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![UMSS](https://img.shields.io/badge/UMSS-Sistemas-black?style=for-the-badge&logo=google-scholar)](https://www.umss.edu.bo/)
 
-Herramienta de seguimiento académico para la carrera de **Ingeniería en Sistemas (UMSS)**. Panel de control con estética cinematográfica dual — *The Batman* y *Deep Navy* — diseñado para sesiones de alta concentración.
+Herramienta de seguimiento académico para la carrera de **Ingeniería en Sistemas (UMSS)**. Panel de control con un sistema de temas personalizable, diseñado para sesiones de alta concentración y planificación estratégica.
 
 ---
 
-## 🛠️ Características v2.0
+## 🛠️ Características v2.1
 
 ### Core
-*   **5 Estados de Materia** — `DISPONIBLE` (ámbar pulsante), `APROBADA` (glow rojo/azul), `BLOQUEADA` (opacidad reducida)
-*   **Lógica de Prerrequisitos** — materias se desbloquean automáticamente. Soporta materias **arrastrando** de semestres anteriores sin asumir orden lineal.
-*   **Modal de Cascada** — antes de desaprobar una materia, el sistema muestra exactamente qué otras materias se perderían. Requiere confirmación explícita.
-*   **Persistencia Local** — progreso y tema guardados en `localStorage`. Funciona sin servidor.
+*   **Múltiples Estados de Materia** — `DISPONIBLE` (ámbar pulsante), `CURSANDO` (azul/verde pulsante), `APROBADA` (glow estático), `BLOQUEADA` (opacidad reducida).
+*   **Lógica de Prerrequisitos Completa** — El sistema desbloquea materias automáticamente. Soporta materias **arrastrando** de semestres anteriores sin asumir un orden lineal.
+*   **Modal de Cascada** — Antes de desaprobar una materia, el sistema muestra un *warning* con el impacto exacto en las materias dependientes, requiriendo confirmación explícita.
+*   **Seguimiento de Intentos** — Registra y muestra discretamente las veces que una materia ha sido reprobada.
+*   **Persistencia Local Avanzada** — Progreso, tema y estados especiales (`cursando`, `habilitada`, `intentos`) guardados en `localStorage`. Funciona 100% offline.
 
 ### UX & Navegación
+*   **Filtro por Especialización** — Barra de herramientas para iluminar rutas académicas (menciones) como *Ing. de Software*, *IA* o *Redes*. Resalta materias de la especialización y sus prerrequisitos troncales.
+*   **Modos de Flexibilidad Académica**:
+    *   **Modo Intensivo** `☀`: Permite marcar materias tomadas en cursos de invierno/verano.
+    *   **Modo Habilitación** `⚡`: Permite marcar materias para cursar sin prerrequisitos, simulando un permiso especial.
 *   **HUD de Estadísticas** — `APROBADAS / DISPONIBLES / BLOQUEADAS` + barra de progreso animada con porcentaje global.
 *   **Progress por Semestre** — mini barra `████░░` bajo cada columna indicando avance local.
 *   **Búsqueda en Tiempo Real** — filtra por nombre, código o área temática. Las no coincidentes se atenúan.
 *   **Resaltado de Dependencias** — al hacer hover, los prerrequisitos se iluminan en ámbar y los dependientes en rojo/azul.
-*   **Backup / Restore** — exporta e importa el progreso como `.json` para sincronizar entre navegadores o dispositivos.
+*   **Backup / Restore** — Exporta e importa todo el progreso como un archivo `.json` para sincronizar entre dispositivos o como respaldo.
 
 ### Diseño
-*   **Modo Dual** — toggle `🦇 Batman` (negro absoluto / rojo neón) ↔ `🌊 Navy` (azul marino profundo / cyan). Persiste entre sesiones.
+*   **Sistema Multi-Tema** — Accede al *Command Center* (`SETTINGS`) para elegir entre múltiples paletas de colores, incluyendo:
+    *   **Sistemas Core**: `The Batman`, `Deep Navy`.
+    *   **Clásicos**: `Modo Oscuro`, `Modo Claro`.
+    *   **Tributos**: Temas inspirados en discografías de *Billie Eilish* y *Lana Del Rey*.
+*   **Easter Egg** — Un acertijo oculto que desbloquea un tema secreto con estética cinematográfica.
 *   **Leyenda de Áreas** — 8 áreas temáticas con color propio: Matemática, Programación, Sistemas, Software, Redes, Gestión, Idiomas, Electivo.
-*   **Fuentes** — `Special Elite` (títulos), `Oswald` (body), `Rajdhani` (códigos y badges técnicos).
-*   **Glassmorphism** — barra de estado inferior con `backdrop-filter: blur`.
-*   **Animaciones** — flash de aprobación (500ms), purge de cascada (320ms), pulse ámbar infinito en disponibles.
+*   **Fuentes Cinematográficas** — `Special Elite` (títulos), `Oswald` (cuerpo), `Rajdhani` (UI técnica).
+*   **Animaciones Fluidas** — Transiciones de estado, pulsos, destellos y efectos de `backdrop-filter` en modales para una experiencia inmersiva.
 
 ---
 
@@ -37,14 +45,14 @@ Herramienta de seguimiento académico para la carrera de **Ingeniería en Sistem
 
 ```bash
 Malla-Ingenieria-en-Sistemas-UMSS/
-├── index.html              # Entry point · modal · HUD · buscador
+├── index.html              # Entry point · Layout · Modals · HUD
 ├── README.md               # Documentación
 └── assets/
-    ├── data.js             # Array de materias con créditos y área
-    ├── storage.js          # Abstracción de localStorage + backup/restore
-    ├── render.js           # Renderizado DOM puro · tooltip · modal · animaciones
-    ├── script.js           # Orchestrator: lógica de negocio · eventos UI
-    ├── style.css           # Design System dual-theme · animaciones · glassmorphism
+    ├── data.js             # Fuente de verdad: Materias, Áreas, Especializaciones
+    ├── storage.js          # Persistencia (localStorage) · Backup/Restore JSON
+    ├── render.js           # Renderizado DOM · UI (cards, modals, tooltips) · Animaciones
+    ├── script.js           # Orquestador · Lógica de estados · Eventos UI
+    ├── style.css           # Design System Multi-Theme · Animaciones · Layout
     └── icons/              # Favicons y web manifest
 ```
 

@@ -51,6 +51,20 @@
 
     --overlay-img:      url('https://www.transparenttextures.com/patterns/dark-leather.png');
     --overlay-opacity:  0.05;
+
+    --cursando:        rgb(37, 99, 235);
+    --cursando-b:      rgb(59, 130, 246);
+    --cursando-bg:     rgba(37, 99, 235, 0.08);
+    --cursando-glow-in: rgba(37, 99, 235, 0.15);
+    --cursando-glow-mid: rgba(37, 99, 235, 0.25);
+    --cursando-glow-out: rgba(37, 99, 235, 0.4);
+    --cursando-glow-hover: rgba(37, 99, 235, 0.5);
+    --cursando-glow-in-hover: rgba(37, 99, 235, 0.3);
+
+    --intentos:        rgb(220, 38, 38);
+    --intentos-bg:     rgba(220, 38, 38, 0.1);
+    --intentos-border: rgba(220, 38, 38, 0.3);
+    --intentos-glow:   rgba(220, 38, 38, 0.5);
 }
 
 /* ─── TEMA NAVY ─────────────────────────────────────── */
@@ -94,6 +108,20 @@
 
     --overlay-img:      url('https://www.transparenttextures.com/patterns/stardust.png');
     --overlay-opacity:  0.07;
+
+    --cursando:        rgb(16, 185, 129);
+    --cursando-b:      rgb(52, 211, 153);
+    --cursando-bg:     rgba(16, 185, 129, 0.08);
+    --cursando-glow-in: rgba(16, 185, 129, 0.15);
+    --cursando-glow-mid: rgba(16, 185, 129, 0.25);
+    --cursando-glow-out: rgba(16, 185, 129, 0.4);
+    --cursando-glow-hover: rgba(16, 185, 129, 0.5);
+    --cursando-glow-in-hover: rgba(16, 185, 129, 0.3);
+
+    --intentos:        rgb(239, 68, 68);
+    --intentos-bg:     rgba(239, 68, 68, 0.1);
+    --intentos-border: rgba(239, 68, 68, 0.3);
+    --intentos-glow:   rgba(239, 68, 68, 0.5);
 }
 
 /* ─── TEMAS CLÁSICOS ────────────────────────────────── */
@@ -129,6 +157,20 @@
     --intensivo-glow:   rgba(255, 152, 0, 0.25);
     --overlay-img:      none;
     --overlay-opacity:  0;
+
+    --cursando:        rgb(59, 130, 246);
+    --cursando-b:      rgb(96, 165, 250);
+    --cursando-bg:     rgba(59, 130, 246, 0.08);
+    --cursando-glow-in: rgba(59, 130, 246, 0.15);
+    --cursando-glow-mid: rgba(59, 130, 246, 0.25);
+    --cursando-glow-out: rgba(59, 130, 246, 0.4);
+    --cursando-glow-hover: rgba(59, 130, 246, 0.5);
+    --cursando-glow-in-hover: rgba(59, 130, 246, 0.3);
+
+    --intentos:        rgb(239, 68, 68);
+    --intentos-bg:     rgba(239, 68, 68, 0.1);
+    --intentos-border: rgba(239, 68, 68, 0.3);
+    --intentos-glow:   rgba(239, 68, 68, 0.5);
 }
 
 [data-theme="classic-light"] {
@@ -163,6 +205,20 @@
     --intensivo-glow:   rgba(230, 81, 0, 0.15);
     --overlay-img:      none;
     --overlay-opacity:  0;
+
+    --cursando:        rgb(37, 99, 235);
+    --cursando-b:      rgb(59, 130, 246);
+    --cursando-bg:     rgba(37, 99, 235, 0.08);
+    --cursando-glow-in: rgba(37, 99, 235, 0.15);
+    --cursando-glow-mid: rgba(37, 99, 235, 0.25);
+    --cursando-glow-out: rgba(37, 99, 235, 0.4);
+    --cursando-glow-hover: rgba(37, 99, 235, 0.5);
+    --cursando-glow-in-hover: rgba(37, 99, 235, 0.3);
+
+    --intentos:        rgb(220, 38, 38);
+    --intentos-bg:     rgba(220, 38, 38, 0.1);
+    --intentos-border: rgba(220, 38, 38, 0.3);
+    --intentos-glow:   rgba(220, 38, 38, 0.5);
 }
 
 /* ─── TEMAS BILLIE EILISH ───────────────────────────── */
@@ -198,6 +254,20 @@
     --intensivo-glow:   rgba(255, 127, 42, 0.25);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/dark-leather.png');
     --overlay-opacity:  0.15;
+
+    --cursando:        rgb(255, 255, 255);
+    --cursando-b:      rgb(255, 255, 255);
+    --cursando-bg:     rgba(255, 255, 255, 0.08);
+    --cursando-glow-in: rgba(255, 255, 255, 0.15);
+    --cursando-glow-mid: rgba(255, 255, 255, 0.25);
+    --cursando-glow-out: rgba(255, 255, 255, 0.4);
+    --cursando-glow-hover: rgba(255, 255, 255, 0.5);
+    --cursando-glow-in-hover: rgba(255, 255, 255, 0.3);
+
+    --intentos:        rgb(255, 165, 0);
+    --intentos-bg:     rgba(255, 165, 0, 0.1);
+    --intentos-border: rgba(255, 165, 0, 0.3);
+    --intentos-glow:   rgba(255, 165, 0, 0.5);
 }
 
 [data-theme="be-fallasleep"] {
@@ -232,6 +302,20 @@
     --intensivo-glow:   rgba(173, 255, 47, 0.25);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/stardust.png');
     --overlay-opacity:  0.15;
+
+    --cursando:        rgb(59, 130, 246);
+    --cursando-b:      rgb(96, 165, 250);
+    --cursando-bg:     rgba(59, 130, 246, 0.08);
+    --cursando-glow-in: rgba(59, 130, 246, 0.15);
+    --cursando-glow-mid: rgba(59, 130, 246, 0.25);
+    --cursando-glow-out: rgba(59, 130, 246, 0.4);
+    --cursando-glow-hover: rgba(59, 130, 246, 0.5);
+    --cursando-glow-in-hover: rgba(59, 130, 246, 0.3);
+
+    --intentos:        rgb(239, 68, 68);
+    --intentos-bg:     rgba(239, 68, 68, 0.1);
+    --intentos-border: rgba(239, 68, 68, 0.3);
+    --intentos-glow:   rgba(239, 68, 68, 0.5);
 }
 
 [data-theme="be-happier"] {
@@ -266,6 +350,20 @@
     --intensivo-glow:   rgba(212, 163, 115, 0.25);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/rice-paper-2.png');
     --overlay-opacity:  0.4;
+
+    --cursando:        rgb(109, 122, 145);
+    --cursando-b:      rgb(139, 152, 175);
+    --cursando-bg:     rgba(109, 122, 145, 0.08);
+    --cursando-glow-in: rgba(109, 122, 145, 0.15);
+    --cursando-glow-mid: rgba(109, 122, 145, 0.25);
+    --cursando-glow-out: rgba(109, 122, 145, 0.4);
+    --cursando-glow-hover: rgba(109, 122, 145, 0.5);
+    --cursando-glow-in-hover: rgba(109, 122, 145, 0.3);
+
+    --intentos:        rgb(185, 92, 80);
+    --intentos-bg:     rgba(185, 92, 80, 0.1);
+    --intentos-border: rgba(185, 92, 80, 0.3);
+    --intentos-glow:   rgba(185, 92, 80, 0.5);
 }
 
 [data-theme="be-hmhas"] {
@@ -300,6 +398,20 @@
     --intensivo-glow:   rgba(255, 74, 74, 0.3);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/stardust.png');
     --overlay-opacity:  0.2;
+
+    --cursando:        rgb(52, 211, 153);
+    --cursando-b:      rgb(110, 231, 183);
+    --cursando-bg:     rgba(52, 211, 153, 0.08);
+    --cursando-glow-in: rgba(52, 211, 153, 0.15);
+    --cursando-glow-mid: rgba(52, 211, 153, 0.25);
+    --cursando-glow-out: rgba(52, 211, 153, 0.4);
+    --cursando-glow-hover: rgba(52, 211, 153, 0.5);
+    --cursando-glow-in-hover: rgba(52, 211, 153, 0.3);
+
+    --intentos:        rgb(248, 113, 113);
+    --intentos-bg:     rgba(248, 113, 113, 0.1);
+    --intentos-border: rgba(248, 113, 113, 0.3);
+    --intentos-glow:   rgba(248, 113, 113, 0.5);
 }
 
 /* ─── TEMAS LANA DEL REY ────────────────────────────── */
@@ -335,6 +447,20 @@
     --intensivo-glow:   rgba(212, 138, 49, 0.25);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/dark-leather.png');
     --overlay-opacity:  0.2;
+
+    --cursando:        rgb(96, 165, 250);
+    --cursando-b:      rgb(147, 197, 253);
+    --cursando-bg:     rgba(96, 165, 250, 0.08);
+    --cursando-glow-in: rgba(96, 165, 250, 0.15);
+    --cursando-glow-mid: rgba(96, 165, 250, 0.25);
+    --cursando-glow-out: rgba(96, 165, 250, 0.4);
+    --cursando-glow-hover: rgba(96, 165, 250, 0.5);
+    --cursando-glow-in-hover: rgba(96, 165, 250, 0.3);
+
+    --intentos:        rgb(248, 113, 113);
+    --intentos-bg:     rgba(248, 113, 113, 0.1);
+    --intentos-border: rgba(248, 113, 113, 0.3);
+    --intentos-glow:   rgba(248, 113, 113, 0.5);
 }
 
 [data-theme="ldr-ultra"] {
@@ -369,6 +495,20 @@
     --intensivo-glow:   rgba(92, 92, 92, 0.2);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/concrete-wall.png');
     --overlay-opacity:  0.25;
+
+    --cursando:        rgb(163, 163, 163);
+    --cursando-b:      rgb(212, 212, 212);
+    --cursando-bg:     rgba(163, 163, 163, 0.08);
+    --cursando-glow-in: rgba(163, 163, 163, 0.15);
+    --cursando-glow-mid: rgba(163, 163, 163, 0.25);
+    --cursando-glow-out: rgba(163, 163, 163, 0.4);
+    --cursando-glow-hover: rgba(163, 163, 163, 0.5);
+    --cursando-glow-in-hover: rgba(163, 163, 163, 0.3);
+
+    --intentos:        rgb(239, 68, 68);
+    --intentos-bg:     rgba(239, 68, 68, 0.1);
+    --intentos-border: rgba(239, 68, 68, 0.3);
+    --intentos-glow:   rgba(239, 68, 68, 0.5);
 }
 
 [data-theme="ldr-nfr"] {
@@ -403,6 +543,20 @@
     --intensivo-glow:   rgba(224, 99, 70, 0.25);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/stardust.png');
     --overlay-opacity:  0.15;
+
+    --cursando:        rgb(192, 132, 252);
+    --cursando-b:      rgb(216, 180, 254);
+    --cursando-bg:     rgba(192, 132, 252, 0.08);
+    --cursando-glow-in: rgba(192, 132, 252, 0.15);
+    --cursando-glow-mid: rgba(192, 132, 252, 0.25);
+    --cursando-glow-out: rgba(192, 132, 252, 0.4);
+    --cursando-glow-hover: rgba(192, 132, 252, 0.5);
+    --cursando-glow-in-hover: rgba(192, 132, 252, 0.3);
+
+    --intentos:        rgb(248, 113, 113);
+    --intentos-bg:     rgba(248, 113, 113, 0.1);
+    --intentos-border: rgba(248, 113, 113, 0.3);
+    --intentos-glow:   rgba(248, 113, 113, 0.5);
 }
 
 [data-theme="ldr-ocean"] {
@@ -437,6 +591,20 @@
     --intensivo-glow:   rgba(158, 95, 60, 0.25);
     --overlay-img:      url('https://www.transparenttextures.com/patterns/stardust.png');
     --overlay-opacity:  0.25;
+
+    --cursando:        rgb(96, 165, 250);
+    --cursando-b:      rgb(147, 197, 253);
+    --cursando-bg:     rgba(96, 165, 250, 0.08);
+    --cursando-glow-in: rgba(96, 165, 250, 0.15);
+    --cursando-glow-mid: rgba(96, 165, 250, 0.25);
+    --cursando-glow-out: rgba(96, 165, 250, 0.4);
+    --cursando-glow-hover: rgba(96, 165, 250, 0.5);
+    --cursando-glow-in-hover: rgba(96, 165, 250, 0.3);
+
+    --intentos:        rgb(239, 68, 68);
+    --intentos-bg:     rgba(239, 68, 68, 0.1);
+    --intentos-border: rgba(239, 68, 68, 0.3);
+    --intentos-glow:   rgba(239, 68, 68, 0.5);
 }
 
 /* ─── RESET BASE ────────────────────────────────────── */
@@ -1324,21 +1492,21 @@ h1 {
 /* ── Estado: CURSANDO ── */
 .course-card.cursando {
     cursor: pointer;
-    background: rgba(59, 130, 246, 0.08); /* Azul semi-transparente */
-    border-color: #3b82f6;
-    border-left-color: #3b82f6;
-    box-shadow: inset 0 0 12px rgba(59, 130, 246, 0.15), 2px 3px 10px rgba(0,0,0,0.4);
+    background: var(--cursando-bg, rgba(59, 130, 246, 0.08));
+    border-color: var(--cursando, #3b82f6);
+    border-left-color: var(--cursando, #3b82f6);
+    box-shadow: inset 0 0 12px var(--cursando-glow-in, rgba(59, 130, 246, 0.15)), 2px 3px 10px rgba(0,0,0,0.4);
     animation: pulse-border-cursando 3s ease-in-out infinite;
 }
 
 @keyframes pulse-border-cursando {
-    0%, 100% { border-color: #3b82f6; box-shadow: inset 0 0 12px rgba(59, 130, 246, 0.15), 0 0 0 rgba(59, 130, 246, 0); }
-    50%      { border-color: #60a5fa; box-shadow: inset 0 0 16px rgba(59, 130, 246, 0.25), 0 0 14px rgba(59, 130, 246, 0.4); }
+    0%, 100% { border-color: var(--cursando, #3b82f6); box-shadow: inset 0 0 12px var(--cursando-glow-in, rgba(59, 130, 246, 0.15)), 0 0 0 rgba(0,0,0,0); }
+    50%      { border-color: var(--cursando-b, #60a5fa); box-shadow: inset 0 0 16px var(--cursando-glow-mid, rgba(59, 130, 246, 0.25)), 0 0 14px var(--cursando-glow-out, rgba(59, 130, 246, 0.4)); }
 }
 
 .course-card.cursando:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5), inset 0 0 14px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 24px var(--cursando-glow-hover, rgba(59, 130, 246, 0.5)), inset 0 0 14px var(--cursando-glow-in-hover, rgba(59, 130, 246, 0.3));
     animation-play-state: paused;
 }
 
@@ -1489,15 +1657,15 @@ h1 {
     font-family: 'Rajdhani', sans-serif;
     font-size: 0.6rem;
     font-weight: 700;
-    color: #ff4444;
+    color: var(--intentos, #ff4444);
     letter-spacing: 1px;
-    background: rgba(255, 68, 68, 0.1);
-    border: 1px solid rgba(255, 68, 68, 0.3);
+    background: var(--intentos-bg, rgba(255, 68, 68, 0.1));
+    border: 1px solid var(--intentos-border, rgba(255, 68, 68, 0.3));
     border-radius: 4px;
     padding: 2px 6px;
     display: inline-block;
     margin-top: 6px;
-    text-shadow: 0 0 4px rgba(255, 68, 68, 0.5);
+    text-shadow: 0 0 4px var(--intentos-glow, rgba(255, 68, 68, 0.5));
 }
 
 .badge-approved             { color: var(--accent-b); }
@@ -1507,7 +1675,7 @@ h1 {
 .badge-intensivo-available  { color: var(--intensivo); }
 .badge-habilitada           { color: var(--habilitacion-b); }
 .badge-habilitacion-posible { color: var(--habilitacion); }
-.badge-cursando             { color: #60a5fa; text-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
+.badge-cursando             { color: var(--cursando-b, #60a5fa); text-shadow: 0 0 6px var(--cursando-glow-out, rgba(59, 130, 246, 0.6)); }
 
 /* ─── BARRA DE STATS (glassmorphism) ────────────────── */
 .stats-bar {
